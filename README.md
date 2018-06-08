@@ -17,6 +17,18 @@ Weather on the Web will not consider Use Cases that require specific business kn
 
 **encoding extensions: for example specifying GeoJSON structures for describing weather at a specific location.
 
+## Folder structure
+
+* the files of the master branch are structured so that each deliverable has its own folder:
+  * [Use Cases](https://github.com/opengeospatial/weather-on-the-web/tree/master/use-cases)
+  <dd>The Weather on the Web Use Cases &amp; Requirements refined and prioritised by the Met Ocean Domain WG that guide the creation of the standard.</dd>
+  
+  * [Business Case](https://github.com/opengeospatial/weather-on-the-web/tree/master/business-case)
+  <dd>This folder contains documents related to the business case for weather on the web, describing the benefits of creating a standard and the types of problems we are trying to solve.</dd>
+  
+  * [Core Specification](https://github.com/opengeospatial/weather-on-the-web/tree/master/Specification)
+  <dd>This folder contains the core specification of Weather on the Web standard.</dd>
+
 ## Contributing
 
 The contributor understands that any contributions, if accepted by the OGC Membership, shall be incorporated into OGC weather on the web standards documents and that all copyright and intellectual property shall be vested to the OGC.
