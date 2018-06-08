@@ -16,3 +16,12 @@ Weather on the Web will not consider Use Cases that require specific business kn
 *Weather meaning any meteorological information that covers past present and future state of the atmosphere including observations and climatological data.
 
 **encoding extensions: for example specifying GeoJSON structures for describing weather at a specific location.
+
+## Contributing
+
+The contributor understands that any contributions, if accepted by the OGC Membership, shall be incorporated into OGC weather on the web standards documents and that all copyright and intellectual property shall be vested to the OGC.
+
+The Met Ocean Domain Working Group is the group at OGC responsible for the stewardship of the standard, but is working to do as much work in public as possible.
+
+* [Open issues](https://github.com/opengeospatial/weather-on-the-web/issues)
+* [Proposing changes](https://github.com/opengeospatial/weather-on-the-web/wiki/Propose-a-change-to-a-draft-of-a-wow-specification-document)
