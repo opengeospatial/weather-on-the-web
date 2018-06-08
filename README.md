@@ -24,4 +24,4 @@ The contributor understands that any contributions, if accepted by the OGC Membe
 The Met Ocean Domain Working Group is the group at OGC responsible for the stewardship of the standard, but is working to do as much work in public as possible.
 
 * [Open issues](https://github.com/opengeospatial/weather-on-the-web/issues)
-* [Proposing changes](https://github.com/opengeospatial/weather-on-the-web/wiki/Propose-a-change-to-a-draft-of-a-wow-specification-document)
+* [Proposing changes](https://github.com/opengeospatial/weather-on-the-web/wiki/Propose-a-change-to-a-draft-wow-specification-document)
