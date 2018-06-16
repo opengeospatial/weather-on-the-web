@@ -24,6 +24,12 @@ A document setting out the range of problems that the Sub Group are trying to so
 
 - 3.2 Spatial Data on the Web Best Practices
 
+- 3.3 Business Case
+Outlining the benefits of Weather on the Web
+
+- 3.4 Core Specification
+A document describing the standard specification required to meet the needs of the use cases
+
 ## 4. Use Cases
 
 ### Use Case - Simple point data
