@@ -22,7 +22,8 @@ The deliverables of this Working Group are described in the Working Group Charte
 - 3.1 Use Cases and Requirements
 A document setting out the range of problems that the Sub Group are trying to solve (this document).
 
-- 3.2 Spatial Data on the Web Best Practices
+- 3.2 Weather on the Web Best Practices
+A range of examples and desceiptions of how to integrate weather information on the web.
 
 - 3.3 Business Case
 Outlining the benefits of Weather on the Web
