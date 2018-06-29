@@ -10,7 +10,9 @@ Weather on the Web is an open iniative coordinated by the Met Ocean Domain Worki
 
 Please participate in our first task to gather use-cases by suggesting new use cases or edits to existing and creating a pull request on our master use case document: [Use-Cases](https://github.com/opengeospatial/weather-on-the-web/tree/master/use-cases/use-cases.md)
 
-Pull requests should conform to our guidlines [Here](https://github.com/opengeospatial/weather-on-the-web/wiki/Propose-a-change-to-a-draft-wow-specification-document)
+A guide to the correct formatting of use cases can be found here: [Use case format](https://github.com/opengeospatial/weather-on-the-web/wiki/Propose-Use-Case-or-Requirement)
+
+Pull requests should conform to our guidlines here: [propose a change](https://github.com/opengeospatial/weather-on-the-web/wiki/Propose-a-change-to-a-draft-wow-specification-document)
 
 **Weather meaning any meteorological information that covers past present and future state of the atmosphere including observations and climatological data.*
 
