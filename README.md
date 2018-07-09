@@ -17,6 +17,18 @@ Weather on the Web will not consider Use Cases that require specific business kn
 
 **encoding extensions: for example specifying GeoJSON structures for describing weather at a specific location.
 
+
+## Deliverables
+The deliverables of this Working Group are described in the Working Group Charter. For convenience those deliverables are replicated in this section. The charter remains the authoritative source of the definition of deliverables.
+
+**1. Use Cases and Requirements**<dd>A set of documents setting out the range of problems that the Sub Group are trying to solve along with a set of requirments that meet the demands of these use cases.</dd>
+
+**2. Weather on the Web Best Practices**<dd>A range of examples and desceiptions of how to integrate weather information on the web.</dd>
+
+**3. Core Specification**<dd>A document describing the standard specification required to meet the needs of the use cases.</dd>
+
+**4. Business Case**<dd>A document outlining the benefits of Weather on the Web.</dd>
+
 ## Folder structure
 The files of the master branch are structured so that each deliverable has its own folder:
 * [Use Cases](https://github.com/opengeospatial/weather-on-the-web/tree/master/use-cases)<dd>The Weather on the Web Use Cases &amp; Requirements refined and prioritised by the Met Ocean Domain WG that guide the creation of the standard.
