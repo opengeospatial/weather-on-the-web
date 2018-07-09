@@ -32,3 +32,8 @@ Generic User Goal: - Obtain or view warning products within a flight path in the
 2.	If no times are included, then the current time is assumed.
 3.	Tropical cyclones advisories may be added.
  
+## Related deliverables:
+1. Use case and requirements
+2. Weather on the web best practice
+
+## Related requirements
