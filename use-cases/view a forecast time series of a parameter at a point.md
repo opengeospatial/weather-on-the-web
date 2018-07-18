@@ -9,7 +9,7 @@ Generic User Goal: - Obtain or view the windows of opportunity/risk.
 Flight Planner, Pilot, ATC
 
 ## Preconditions:
-1.	Gridded products of forecast visibility are available in Horace V.
+1.	Gridded products of forecast visibility are available.
 2.	A WFS web service, using a set of stored procedures that delivers to the client the time series for a parameter.
 
 ## Process: 
