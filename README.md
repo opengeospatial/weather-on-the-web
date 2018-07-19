@@ -23,7 +23,7 @@ The deliverables of this Working Group are described in the Working Group Charte
 
 **1. Use Cases and Requirements**<dd>A set of documents setting out the range of problems that the Sub Group are trying to solve along with a set of requirments that meet the demands of these use cases.</dd>
 
-**2. Weather on the Web Best Practices**<dd>A range of examples and desceiptions of how to integrate weather information on the web.</dd>
+**2. Weather on the Web Best Practices**<dd>A range of examples and descriptions of how to integrate weather information on the web.</dd>
 
 **3. Core Specification**<dd>A document describing the standard specification required to meet the needs of the use cases.</dd>
 
