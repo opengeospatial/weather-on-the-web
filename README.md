@@ -43,6 +43,13 @@ The files of the master branch are structured so that each deliverable has its o
 * [Best Practice](https://github.com/opengeospatial/weather-on-the-web/tree/master/best%20practice)<dd>This folder contains the files that comprimise the best practice guide.
 </dd>
 
+* [Design Principles](https://github.com/opengeospatial/weather-on-the-web/tree/master/design-principles)<dd>This folder contains the description of agreed design principles for Weather on the Web.
+</dd>
+
+* [Engineering](
+https://github.com/opengeospatial/weather-on-the-web/tree/master/engineering)<dd>This folder contains engineering and development related artifacts, including example code and demonstrators.
+</dd>
+
 ## Contributing
 
 The contributor understands that any contributions, if accepted by the OGC Membership, shall be incorporated into OGC weather on the web standards documents and that all copyright and intellectual property shall be vested to the OGC.
