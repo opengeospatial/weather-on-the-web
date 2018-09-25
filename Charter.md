@@ -11,16 +11,16 @@ The purpose of Weather on the Web is to clarify and formalise the weather relate
 - and to produce a set of best practice for use of weather information on the web.
 
 ## Deliverables
-To achieve the purpose of Weather on the Web
+To achieve the purpose of Weather on the Web the sub group will focus on four project activities:
 
-**1. Use Cases and Requirements**<dd>A set of documents setting out the range of problems that the Sub Group are trying to solve along with a set of requirments that meet the demands of these use cases.</dd>
+**1. Use Cases and Requirements**<dd>A set of documents setting out the range of problems that the Sub Group and wider user community are trying to solve along with a set of requirments that meet the demands of these use cases.</dd>
 
-**2. Weather on the Web Best Practices**<dd>A range of examples and descriptions of how to integrate weather information on the web.</dd>
+**2. Weather on the Web Best Practices**<dd>A range of examples and descriptions of how to integrate weather information on the web, coordinated into a set of web pages publically available.</dd>
 
-**3. Core Specification**<dd>A document describing the standard specifications required to meet the needs of the use cases.</dd>
+**3. Core Specification**<dd>A document describing the standard specifications for encoding, data structure and access patterns required to meet the needs of the use cases.</dd>
 
 **4. Business Case**<dd>A document outlining the benefits of Weather on the Web.</dd>
 
 ## Group Organisation
 
-All documentaiton will be openly stored and managed via the GitHub repository, a review team are responsible for maintaining the repository reviewing pull requests and issues. 
+All documentaiton will be openly stored and managed via the GitHub repository, a review team are responsible for maintaining the repository reviewing pull requests and issues.
