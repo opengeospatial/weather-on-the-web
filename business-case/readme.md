@@ -6,3 +6,10 @@ This folder contains documents related to the business case for weather on the w
 What are the range of issues being faced by users of our weather services?
 providing services that cross the boundaries of multiple weather data providors
 seemless access across temporal and spatial domains
+
+## Major Business Cases
+1. WIS (WMO Information System) 2.0
+
+2. International Defence, in paticular NATO
+
+3. International Aviation
