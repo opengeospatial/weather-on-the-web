@@ -6,7 +6,7 @@ The Geo Proxy maintains a registry of global country boundaries and links these 
 Currently the demonstrator adapts the different point feature APIs from UK Met Office, Met Norway and NOAA and presents these in the common format described by the proposed [Feature Data Format](https://github.com/opengeospatial/weather-on-the-web/blob/master/Specification/Feature%20Data%20Format%20proposal.md)
 This is not ideal as a different adapter would be required for each participating data provider, the preferred approach is for each data center to provide an API that conforms to the standard.
 
-The Demonstrator and Admin screen are available here:
+The Demonstrator and Admin screen are available here:<br>
 [Feature Data Demonstrator](http://labs.metoffice.gov.uk/map/owdemo/)
 
 [Feature Data Admin Screen](http://labs.metoffice.gov.uk/map/owdemo/admin.html)
