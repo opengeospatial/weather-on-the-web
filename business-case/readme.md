@@ -14,4 +14,4 @@ seamless access across temporal and spatial domains
 
 3. International Aviation
 
-4. Public weather services (current conditions, forecasts, alerts, etc.) integration across [NNMSs](https://public.wmo.int/en/our-mandate/how-we-do-it/role-and-operation-of-nmhss)
+4. Public weather services (current conditions, forecasts, alerts, etc.) integration across [NMHSs](https://public.wmo.int/en/our-mandate/how-we-do-it/role-and-operation-of-nmhss)
