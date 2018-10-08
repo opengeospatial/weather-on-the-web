@@ -196,13 +196,13 @@ Wind speed for the defined time
 
 Wind direction in decimal degrees for the defined time
 
-##### Weather Text
+##### Precipitation Type
 
-Short Text description of weather conditions for the defined time
+The previlant precipitation type for the defined time
 
-##### Weather Icon
+#### Precipitation Rate
 
-Link to an icon describing weather conditions for the defined time
+The rate of precipitation for the defined time
 
 ##### Maximum Air Temperature
 
@@ -212,7 +212,17 @@ Maximum Temperature value for the defined time period
 
 Minimum Temperature value for the defined time period
 
-### Appendix B. Query options MUST be supported by Feature Data compatible APIs
+### Appendix B. List of data types that COULD be supported by feature data compatible APIs
+
+##### Weather Text
+
+Short Text description of weather conditions for the defined time
+
+##### Weather Icon
+
+Link to an icon describing weather conditions for the defined time
+
+### Appendix C. Query options MUST be supported by Feature Data compatible APIs
 
 #### Position of request
 
@@ -236,7 +246,7 @@ A GeoHash encoding of the latitude and longitude of the request
 
 Query parameter to define the type of units to return Metric or Imperial, by default Feature Data APIs should return data in Metric units
 
-### Appendix C. Examples
+### Appendix D. Examples
 
 ##### i18n Objects
 
@@ -558,12 +568,13 @@ This specification uses ideas and sentence structures from the [GeoJSON](https:/
         *   [4.10 Parameter Objects](#410-parameter-objects)
         *   [4.11 Metadata objects](#411-metadata-objects)
         *   [Appendix A. List of data types that MUST be supported by Feature Data compatible APIs](#appendix-a-list-of-data-types-that-must-be-supported-by-open-weather-compatible-apis)
-        *   [Appendix B. Query options MUST be supported by Feature Data compatible APIs](#appendix-b-query-options-must-be-supported-by-open-weather-compatible-apis)
+        *   [Appendix B. List of data types that COULD be supported by Feature Data compatible APIs](#appendix-b-list-of-data-types-that-must-be-supported-by-open-weather-compatible-apis)
+        *   [Appendix C. Query options MUST be supported by Feature Data compatible APIs](#appendix-c-query-options-must-be-supported-by-open-weather-compatible-apis)
             *   [Position of request](#position-of-request)
                 *   [Query parameter to define location to return data for either :](#query-parameter-to-define-location-to-return-data-for-either)
                 *   [Or (in order to simplify query caching) :](#or-in-order-to-simplify-query-caching)
             *   [Units](#units)
-        *   [Appendix C. Examples](#appendix-c-examples)  
+        *   [Appendix D. Examples](#appendix-d-examples)  
             * [i18n Objects](#i18n-objects)  
             * [time Objects](#time-objects)  
             * [bbox Objects](#bbox-objects)  
