@@ -58,3 +58,5 @@ The Met Ocean Domain Working Group is the group at OGC responsible for the stewa
 
 * [Open issues](https://github.com/opengeospatial/weather-on-the-web/issues)
 * [Proposing changes](https://github.com/opengeospatial/weather-on-the-web/wiki/Propose-a-change-to-a-draft-wow-specification-document)
+
+Join the discussion on our Slack Channel [WotW Slack](https://join.slack.com/t/weatherontheweb/shared_invite/enQtNDQ1NTM1NTA5NzAzLTZjMWM0NjgxMWVkM2QyNjVlNzZlMTg2ZWQxOTQ3Mzc5ZDhlZjZkNWFiYWVhMTU4ZTk3MGQyMzY0MDk4NjljNGE)
