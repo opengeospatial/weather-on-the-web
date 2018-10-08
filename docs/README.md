@@ -17,3 +17,5 @@ Pull requests should conform to our guidlines here: [propose a change](https://g
 **Weather meaning any meteorological information that covers past present and future state of the atmosphere including observations and climatological data.*
 
 ***encoding extensions: for example specifying GeoJSON structures for describing weather at a specific location.*
+
+Join the discussion on our Slack Channel [WotW Slack](https://join.slack.com/t/weatherontheweb/shared_invite/enQtNDQ1NTM1NTA5NzAzLTZjMWM0NjgxMWVkM2QyNjVlNzZlMTg2ZWQxOTQ3Mzc5ZDhlZjZkNWFiYWVhMTU4ZTk3MGQyMzY0MDk4NjljNGE)
