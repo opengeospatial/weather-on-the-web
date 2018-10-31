@@ -20,7 +20,7 @@ Developer Application
 1. The System determines the geospatial location of the request's context.
 2. The System determines the time period spanning the request’s context.
 3. The System determines the weather radar data type (e.g. rain, snow) relevant to the request's context.
-4. For the given location, time period and weather radar data type, the Sytem provides a list of weather radar data images
+4. For the given location, time period and weather radar data type, the System provides a list of weather radar data images
 
 ## Required input details:
 1. Specify location (lat, long, bounding box)
