@@ -4,7 +4,7 @@
 **Contributed by:** @tomkralidis - Meteorological Service of Canada
 
 ## Typical user scenario:
-Displaying radar imagery from 4 hours past.  The scope is a national context
+Displaying radar imagery from a given time range.  The scope is a national context
 radar visualization application displaying near real-time radar atop other
 GIS layers (basemap/topography, placenames).
 
