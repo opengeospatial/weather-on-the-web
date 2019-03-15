@@ -40,7 +40,7 @@ The files of the master branch are structured so that each deliverable has its o
 * [Core Specification](https://github.com/opengeospatial/weather-on-the-web/tree/master/Specification)<dd>This folder contains the core specification of Weather on the Web standard.
 </dd>
 
-* [Best Practice](https://github.com/opengeospatial/weather-on-the-web/tree/master/best%20practice)<dd>This folder contains the files that compromise the best practice guide.
+* [Best Practice](https://github.com/opengeospatial/weather-on-the-web/tree/master/best%20practice)<dd>This folder contains the files that comprise the best practice guide.
 </dd>
 
 * [Design Principles](https://github.com/opengeospatial/weather-on-the-web/tree/master/design-principles)<dd>This folder contains the description of agreed design principles for Weather on the Web.
