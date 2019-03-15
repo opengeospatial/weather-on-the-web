@@ -7,7 +7,7 @@ The purpose of Weather on the Web is to clarify and formalise the weather relate
 - to define a range of access patterns and encoding extensions** that cover a set of core use cases specified; 
 - to identify and assess existing methods and tools; 
 - to drive consensus on weather standards for the web;
-- and to produce a set of best practice for use of weather information on the web.
+- and to produce a set of best practice for the use of weather information on the web.
 
 Weather on the Web is solely focused on data APIs as opposed to product APIs, in which specific business logic and understanding the context of use is required to add further value. 
 
@@ -21,7 +21,7 @@ Weather on the Web will not consider Use Cases that require specific business kn
 ## Deliverables
 The deliverables of this Working Group are described in the Working Group Charter. For convenience those deliverables are replicated in this section. The charter remains the authoritative source of the definition of deliverables.
 
-**1. Use Cases and Requirements**<dd>A set of documents setting out the range of problems that the Sub Group are trying to solve along with a set of requirments that meet the demands of these use cases.</dd>
+**1. Use Cases and Requirements**<dd>A set of documents setting out the range of problems that the Sub Group are trying to solve along with a set of requirements that meet the demands of these use cases.</dd>
 
 **2. Weather on the Web Best Practices**<dd>A range of examples and descriptions of how to integrate weather information on the web.</dd>
 
@@ -40,7 +40,7 @@ The files of the master branch are structured so that each deliverable has its o
 * [Core Specification](https://github.com/opengeospatial/weather-on-the-web/tree/master/Specification)<dd>This folder contains the core specification of Weather on the Web standard.
 </dd>
 
-* [Best Practice](https://github.com/opengeospatial/weather-on-the-web/tree/master/best%20practice)<dd>This folder contains the files that comprimise the best practice guide.
+* [Best Practice](https://github.com/opengeospatial/weather-on-the-web/tree/master/best%20practice)<dd>This folder contains the files that comprise the best practice guide.
 </dd>
 
 * [Design Principles](https://github.com/opengeospatial/weather-on-the-web/tree/master/design-principles)<dd>This folder contains the description of agreed design principles for Weather on the Web.
