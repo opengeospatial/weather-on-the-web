@@ -66,7 +66,7 @@ interrogated to determine what information is available, this includes
 the API definition of the server as well as metadata about the
 collections provided by the server.
 
-# Specifiction details 
+# Specification details 
 
 Documenation for the candidate is available at:
 
