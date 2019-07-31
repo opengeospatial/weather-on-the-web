@@ -1,0 +1,28 @@
+openapi: 3.0.2
+info:
+    title: 'Point Web Service'
+    description: 'This in an implemention of a point query service, based on the OGC web api guidelines'
+    contact:
+        name: ""
+    version: 1.0.0
+servers:
+    -
+        url: 'http://data.example.org'
+        description: 'This server'
+paths:
+    /:
+        $ref: 'wotw_domain.yaml#/paths/~1'
+    /conformance:
+        $ref: 'wotw_domain.yaml#/paths/~1conformance'        
+    /groups:
+        $ref: 'wotw_domain.yaml#/paths/~1groups'
+    '/groups/{groupId}':
+        $ref: 'wotw_domain.yaml#/paths/~1groups~1%7BgroupId%7D'
+    /collections:
+        $ref: 'wotw_domain.yaml#/paths/~1collections'
+    '/collections/{collectionId}':
+        $ref: 'wotw_domain.yaml#/paths/~1collections~1%7BcollectionId%7D'
+    '/collections/{collectionId}/{instanceId}':
+        $ref: 'wotw_domain.yaml#/paths/~1collections~1%7BcollectionId%7D~1%7BinstanceId%7D'
+    '/collections/{collectionId}/{instanceId}/point':
+        $ref: 'wotw_domain.yaml#/paths/~1collections~1%7BcollectionId%7D~1%7BinstanceId%7D~1polygon'

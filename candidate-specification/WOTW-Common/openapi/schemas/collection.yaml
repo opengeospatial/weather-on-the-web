@@ -1,0 +1,13 @@
+type: object
+required:
+  - links
+  - collections
+properties:
+  links:
+    type: array
+    items:
+      $ref: https://raw.githubusercontent.com/opengeospatial/oapi_common/master/OAPI-Common/openapi/schemas/link.yaml
+  collection:
+    type: array
+    items:
+      $ref: https://raw.githubusercontent.com/opengeospatial/oapi_common/master/OAPI-Common/openapi/schemas/collectionInfo.yaml

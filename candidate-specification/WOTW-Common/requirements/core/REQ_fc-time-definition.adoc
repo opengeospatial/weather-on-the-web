@@ -1,0 +1,35 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/fc-time-definition 
+^|A |Each resource collection operation MAY support a `time` parameter.
+^|B |This `time` parameter SHALL have the following characteristics (using an OpenAPI Specification 3.0 fragment):
+
+[source,YAML]
+----
+name: time
+in: query
+required: false
+schema:
+  type: string
+style: form
+explode: false
+----
+|===
+
+The time parameter value should follow the standard link:https://en.wikipedia.org/wiki/ISO_8601[ISO8601] conventions for describing time periods:
+
+[source,Java]
+----
+Spot value: 
+time=dd-MM-YYYYTHH:mm:ssZ
+i.e. time=10-05-2019T12:15:00Z
+
+Time Range: 
+time=dd-MM-YYYYTHH:mm:ssZ/dd-MM-YYYYTHH:mm:ssZ
+i.e. time=12-05-2019T15:15:00Z/16-05-2019T12:15:00Z
+
+Time Range with at defined intervals
+time=Rn/dd-MM-YYYYTHH:mm:ssZ/dd-MM-YYYYTHH:mm:ssZ
+i.e. R4/12-05-2019T00:00:00Z/12-05-2019T01:00:00Z
+----
+For time range values the end time could also be defined as a ISO8601 duration value

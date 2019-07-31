@@ -1,0 +1,111 @@
+
+
+==== Parameters
+
+==== Parameter bbox
+    
+include::WOTW-Common/openapi/schemas/REQ_rc-bbox-definition.adoc[]
+    
+include::WOTW-Common/openapi/schemas/REQ_rc-bbox-response.adoc[]
+    
+"Intersects" means that the rectangular area specified in the parameter `bbox` includes a coordinate that is part of the (spatial) geometry of the resource. This includes the boundaries of the geometries (e.g. for curves the start and end position and for surfaces the outer and inner rings).
+    
+For WGS84 longitude/latitude the bounding box is in most cases the sequence of minimum longitude, minimum latitude, maximum longitude and maximum latitude. However, in cases where the  box spans the anti-meridian the first value (west-most box edge) is larger than the third value (east-most box edge).
+    
+.A bounding box covering the UK 
+=================
+A bounding box covering the UK in WGS84 (from 15°W to 5°E and from 60.95°S to 48.8°S) would be represented in JSON as `[ -15, 48.8, 5, 60.95 ]` and in a query as `bbox=-15,48.8,5,60.95`.
+=================
+    
+A template for the definition of the parameter in YAML according to OpenAPI 3.0 is available at link:/WOTW-Common/openapi/parameters/bbox.yaml[bbox.yaml].
+    
+==== Parameter z
+    
+include::WOTW-Common/openapi/schemas/REQ_rc-z-definition.adoc[]
+    
+include::WOTW-Common/openapi/schemas/REQ_rc-z-response.adoc[]
+    
+Best match from requested z range to underlying data will depend on the chosen interpolation method.  If no suitable match is found a 404 error message should be returned.
+    
+.A Z value
+=================
+retrive data for 850hPa
+    
+`z=850`
+=================
+    
+.A defined list of levels
+=================
+retreive data for 250hPa, 350hPa, 500hPa, 850hPa, 1000hPa
+    
+`z=250,350,500,850,1000`
+=================
+    
+.All data avilable between minimum and maximum vertical levels
+=================
+retreive data between 10m and 10000m
+    
+`z=10%2F10000`
+=================
+    
+.Data between minimum and maximum vertical levels at user defined intervals
+=================
+retreive data between 100m and 1000m at 100m intervals
+    
+`z=R10%2F100%2F1000`
+=================
+    
+==== Parameter interpolationX
+    
+include::WOTW-Common/openapi/schemas/REQ_rc-interpolationX-definition.adoc[]
+
+<<<
+
+include::WOTW-Common/openapi/schemas/REQ_rc-interpolationX-response.adoc[]
+    
+If not specified the query will not perform any interpolation of data along the X axis.  If the interpolationX method does not match an entry in the defined list of valid interpolationX methods for the collection a 403 message SHOULD be returned.
+    
+A template for the definition of the parameter in YAML according to OpenAPI 3.0 is available at link:/WOTW-Common/openapi/parameters/interpolation_intervals.yaml[interpolation_intervals.yaml].
+    
+.An interpolationX
+=================
+Use the defined linear algorithm to return 10 values between the minimum X value and the maximum X value
+    
+`interpolationX=R10/linear`
+=================
+    
+==== Parameter interpolationY
+    
+include::WOTW-Common/openapi/schemas/REQ_rc-interpolationY-definition.adoc[]
+
+<<<
+    
+include::WOTW-Common/openapi/schemas/REQ_rc-interpolationY-response.adoc[]
+    
+If not specified the query will not perform any interpolation of data along the Y axis.  If the interpolationY method does not match an entry in the defined list of valid interpolationY methods for the collection a 403 message SHOULD be returned.
+    
+A template for the definition of the parameter in YAML according to OpenAPI 3.0 is available at link:/WOTW-Common/openapi/parameters/interpolation_intervals.yaml[interpolation_intervals.yaml].
+    
+.An interpolationY
+=================
+Use the defined nearest-neighbour algorithm to return 3 values between the minimum Y value and the maximum Y value 
+    
+`interpolationY=R3/nearest-neighbour`
+=================
+    
+==== Parameter interpolationZ
+    
+include::WOTW-Common/openapi/schemas/REQ_rc-interpolationZ-definition.adoc[]
+    
+include::WOTW-Common/openapi/schemas/REQ_rc-interpolationZ-response.adoc[]
+    
+If not specified the query will not perform any interpolation of data along the Z axis.  If the interpolationZ method does not match an entry in the defined list of valid interpolationY methods for the collection a 403 message SHOULD be returned.
+    
+A template for the definition of the parameter in YAML according to OpenAPI 3.0 is available at link:/WOTW-Common/openapi/parameters/interpolation_intervals.yaml[interpolation_intervals.yaml].
+    
+.An interpolationZ
+=================
+Use the defined log_pressure algorithm to return 5 values between the minimum Z value and the maximum Z value 
+    
+`interpolationZ=R5/log_pressure`
+=================

@@ -1,0 +1,7 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/wow-md-parameters 
+^|A |A `200`-response SHALL include a list of parameter definitions in the `parameters` property of the response:
+
+^|B |All parameters SHALL include the `id`,`type`, `unit`, `description` and `observedProperty` definitions.
+|===

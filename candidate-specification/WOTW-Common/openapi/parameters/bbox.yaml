@@ -1,0 +1,8 @@
+name: bbox
+in: query
+description: Only data that has a geometry that intersects the bounding box are selected. The bounding box is provided as four numbers, which are values in the coordinate system defined by the ouputcrs query parameter (if outputcrs is not defined the values will be assumed to be WGS84 longitude/latitude coordinates).  Regardless of the outputcrs value the bbox values MUST always be in the order:\n\nminX, minY, maxX, maxY\n\nHowever, in cases where the box spans the antimeridian the first value (west-most box edge) is larger than the third value (east-most box edge)
+required: true
+schema: 
+    type: array
+    items: 
+        type: number
