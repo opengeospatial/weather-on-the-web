@@ -1,0 +1,7 @@
+[width="90%",cols="2,6a"]
+|===
+|*Requirement {counter:req-id}* |/req/core/wow-md-collection 
+^|A |A `200`-response SHALL include a list of collection definitions in the `collection` property of the response:
+
+^|B |All parameters SHALL include the `id`,`title`, `description`, `extent` and `links` definitions.
+|===

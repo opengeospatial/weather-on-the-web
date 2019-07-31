@@ -1,0 +1,5 @@
+name: interpolation_intervals
+in: query
+description: This is defined if the query doesn't require data at its native \nresolution, the format is:\n\ninterpolation=R<interpolation_intervals>/<interpolation method> \ne.g.\ninterpolation=linear\n\n available methods are listed in the collections metadata of this API\n",
+schema: 
+    type: string

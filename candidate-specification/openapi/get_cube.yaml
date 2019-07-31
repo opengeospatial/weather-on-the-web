@@ -1,0 +1,1042 @@
+openapi: 3.0.2
+info:
+    title: 'Cube Web Service'
+    description: "GetCube API based on the OGC web API guidelines, cube based on x,y,z and t \ndimensions.\n"
+    contact:
+        name: ""
+    version: 1.0.0
+servers:
+    -
+        url: 'http://data.example.org'
+        description: 'Demonstration of cube query API based on the OGC OpenAPI core'
+paths:
+    /:
+        $ref: 'wotw_domain.yaml#/paths/~1'
+    /conformance:
+        $ref: 'wotw_domain.yaml#/paths/~1conformance'        
+    /groups:
+        $ref: 'wotw_domain.yaml#/paths/~1groups'
+    '/groups/{groupId}':
+        $ref: 'wotw_domain.yaml#/paths/~1groups~1%7BgroupId%7D'
+    /collections:
+        $ref: 'wotw_domain.yaml#/paths/~1collections'
+    '/collections/{collectionId}':
+        $ref: 'wotw_domain.yaml#/paths/~1collections~1%7BcollectionId%7D'
+        get:
+            tags:
+                - Capabilities
+            summary: 'information about standards that this API conforms to'
+            description: 'list all requirements classes specified in a standards that the server conforms to'
+            operationId: getRequirementsClasses
+            parameters:
+                -
+                    name: outputFormat
+                    in: query
+                    description: 'mime type of returned output'
+                    schema:
+                        enum:
+                            - application/json
+                            - text/xml
+                            - text/html
+                            - application/x-yaml
+            responses:
+                '200':
+                    description: 'the URIs of all requirements classes supported by the server'
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/req-classes'
+                        text/xml:
+                            schema:
+                                $ref: '#/components/schemas/req-classes'
+                        application/x-yaml:
+                            schema:
+                                $ref: '#/components/schemas/req-classes'
+                        text/html:
+                            schema:
+                                $ref: '#/components/schemas/req-classes'
+                default:
+                    description: 'An error occured.'
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/exception'
+    '/collections/{collectionId}/cube':
+        get:
+            tags:
+                - Data
+            summary: 'Get data values'
+            description: 'Return the data values for the data cube defined by the query parameters'
+            operationId: GetData
+            parameters:
+                -
+                    name: collectionId
+                    in: path
+                    description: 'Identifier (name) of a specific collection'
+                    required: true
+                    schema:
+                        type: string
+                -
+                    name: parameters
+                    in: query
+                    description: "comma delimited list of parameters to retrieve data for.  Valid parameters are\nlisted in the collections metadata"
+                    required: true
+                    explode: false
+                    schema:
+                        minItems: 1
+                        type: array
+                        items:
+                            type: string
+                -
+                    name: outputFormat
+                    in: query
+                    description: 'Data format of the returned the data values'
+                    required: true
+                    schema:
+                        enum:
+                            - application/json
+                            - application/x-netcdf
+                            - application/x-grib
+                        type: string
+                -
+                    name: crs
+                    in: query
+                    description: "Coordinate system that the data should be returned in, defined as an EPSG code \nvalue e.g. EPSG:4326.  If not specified output will be in the native coordinate \nsystem of the data"
+                    required: false
+                    schema:
+                        type: string
+                -
+                    name: bbox
+                    in: query
+                    description: "Only data that has a geometry that intersects the bounding box are selected. The bounding box is provided as four numbers, which are values in the coordinate system defined by the ouputcrs query parameter (if outputcrs is not defined the values will be assumed to be WGS84 longitude/latitude coordinates).  Regardless of the outputcrs value the bbox values MUST always be in the order:\n\nminX, minY, maxX, maxY\n\nHowever, in cases where the box spans the antimeridian the first value (west-most box edge) is larger than the third value (east-most box edge)"
+                    required: true
+                    schema:
+                        type: array
+                        items:
+                            type: number
+                -
+                    name: z
+                    in: query
+                    description: "Only data that have vertial levels which that intersects the specified range are selected.  This query parameter can have three forms:\n\nSingle value: z=<value>  e.g. z=750\n\nList of values as a comma delimited list: z=<value1>,<value2>,...,<value3> e.g. z=950,850,650,200\nRange of values delimited by a / : z=<minimum value>/<maximum value> e.g. z=350/650\n\nUnits of the vertical values are the native values of the underlying data"
+                    required: false
+                    schema:
+                        type: string
+                -
+                    name: time
+                    in: query
+                    description: "Either a date-time or a period string that adheres to RFC 3339, Only data that \nhas a temporal property that intersects the value of time are selected. \n\nExamples:\n\nA date-time: \"2019-02-18T20:00:00Z\" \nA period: \"2019-03-12T00:00:00Z/2019-03-18T12:00:00Z\" \n            or \"2019-02-12T00:00:00Z/P1M6DT12H\"\n\nThe intervals to return data for can be defined as a repeating intervals so if \n15 minute data is required between 12Z on the 29th March 2019 to 18Z on the 29th\n March it would be defined as \n R24/2019-03-29T12:00:00Z/2019-03-29T18:00:00Z\n "
+                    required: true
+                    schema:
+                        type: string
+                -
+                    name: interpolationX
+                    in: query
+                    description: "This is defined if the query doesn't require data at its native X coordinate \nresolution, the format is:\n\ninterpolationX=<interpolation method>/<interpolation resolution> \ne.g.\ninterpolationX=linear/15\n\nThe interpolation resolution is the number of intervals the user requires between\nthe minimum X value of the bounding box and the maximum X value of the bounding box.\n\nThe valid interpolation method values are available in the results of the \ncapabilities query methods of this API\n"
+                    schema:
+                        type: string
+                -
+                    name: interpolationY
+                    in: query
+                    description: "This is defined if the query doesn't require data at its native Y coordinate \nresolution, the format is:\n\ninterpolationY=<interpolation method>/<interpolation resolution> \ne.g.\ninterpolationY=linear/5\n\nThe interpolation resolution is the number of intervals the user requires between\nthe minimum Y value of the bounding box and the maximum Y value of the bounding box.\n\nThe valid interpolation method values are available in the results of the \ncapabilities query methods of this API\n"
+                    schema:
+                        type: string
+                -
+                    name: interpolationZ
+                    in: query
+                    description: "This is defined if the query doesn't require data at its native Z coordinate \nresolution, the format is:\n\ninterpolationZ=<interpolation method>/<interpolation resolution>\ne.g.\ninterpolationZ=linear/10\n\nThe interpolation resolution is the number of intervals the user requires between\nthe minimum Z value and the maximum Z value.\n\nThe valid interpolation method values are available in the results of the \ncapabilities query methods of this API\n"
+                    schema:
+                        type: string
+            responses:
+                '200':
+                    description: 'A coverage'
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CoverageJSON'
+                        application/x-netcdf:
+                            schema:
+                                format: binary
+                                type: string
+                        application/x-grib:
+                            schema:
+                                format: binary
+                                type: string
+                        text/html:
+                            schema:
+                                type: string
+                default:
+                    description: 'An error occured.'
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/exception'
+                        text/html:
+                            schema:
+                                type: string
+            security:
+                -
+                    x-api-key: []
+        parameters:
+            -
+                name: collectionId
+                in: path
+                description: 'Unique idenfifier for the collection'
+                required: true
+                schema:
+                    type: string
+components:
+    schemas:
+        exception:
+            required:
+                - code
+            type: object
+            properties:
+                code:
+                    type: string
+                description:
+                    type: string
+        root:
+            required:
+                - links
+            type: object
+            properties:
+                links:
+                    description: 'links to the functions available in the API'
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/link'
+                    example:
+                        -
+                            href: 'http://data.example.org/beta/'
+                            rel: self
+                            type: application/json
+                            title: 'this document'
+                        -
+                            href: 'http://data.example.org/beta/api'
+                            rel: service
+                            type: application/openapi+json;version=3.0
+                            title: 'the API definition'
+                        -
+                            href: 'http://data.example.org/beta/conformance'
+                            rel: conformance
+                            type: application/json
+                            title: 'Conformance classes implemented by this server'
+                        -
+                            href: 'http://data.example.org/beta/collections'
+                            rel: data
+                            type: application/json
+                            title: 'Metadata about the coverage collections'
+            example: "{\n    \"links\": [\n        {\n            \"href\": \"some text\",\n            \"rel\": \"some text\",\n            \"type\": \"some text\",\n            \"hreflang\": \"some text\"\n        },\n        {\n            \"href\": \"some text\",\n            \"rel\": \"some text\",\n            \"type\": \"some text\",\n            \"hreflang\": \"some text\"\n        }\n    ]\n}"
+        req-classes:
+            description: 'Definition of the standards that the service conforms to'
+            required:
+                - conformsTo
+            type: object
+            properties:
+                conformsTo:
+                    description: 'Links to the standard and formats that the service conforms to'
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/link'
+                    example:
+                        - 'https://github.com/covjson/specification'
+            example: "{\n    \"conformsTo\": [\n        {\n            \"href\": \"some text\",\n            \"rel\": \"some text\",\n            \"type\": \"some text\",\n            \"hreflang\": \"some text\"\n        },\n        {\n            \"href\": \"some text\",\n            \"rel\": \"some text\",\n            \"type\": \"some text\",\n            \"hreflang\": \"some text\"\n        }\n    ]\n}"
+        link:
+            required:
+                - href
+            type: object
+            properties:
+                href:
+                    type: string
+                rel:
+                    type: string
+                    example: prev
+                type:
+                    type: string
+                    example: application/geo+json
+                hreflang:
+                    type: string
+                    example: en
+        content:
+            description: 'Information about the available collections in this service'
+            required:
+                - collections
+                - links
+            type: object
+            properties:
+                links:
+                    description: 'link to the collection metadata'
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/link'
+                    example:
+                        -
+                            href: 'http://data.example.org/beta/collections?f=json'
+                            rel: self
+                            type: application/json
+                            title: 'this document'
+                        -
+                            href: 'http://data.example.org/beta/collections?f=html'
+                            rel: alternate
+                            type: text/html
+                            title: 'this document as HTML'
+                collections:
+                    description: 'List of the available collections in this service'
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/collectionInfo'
+            example: "{\n    \"links\": [\n        {\n            \"href\": \"some text\",\n            \"rel\": \"some text\",\n            \"type\": \"some text\",\n            \"hreflang\": \"some text\"\n        },\n        {\n            \"href\": \"some text\",\n            \"rel\": \"some text\",\n            \"type\": \"some text\",\n            \"hreflang\": \"some text\"\n        }\n    ],\n    \"collections\": [\n        {\n            \"href\": \"some text\",\n            \"name\": \"some text\",\n            \"description\": \"some text\"\n        },\n        {\n            \"href\": \"some text\",\n            \"name\": \"some text\",\n            \"description\": \"some text\"\n        }\n    ]\n}"
+        collectionInfo:
+            required:
+                - links
+                - collections
+            type: object
+            properties:
+                links:
+                    description: 'List of links to alternate formats for this document'
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/link'
+                collections:
+                    description: 'List of the collections available from this service'
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/collectionDetail'
+            example: "{\n    \"links\": [\n        {\n            \"href\": \"http://data.example.org/collections.json\",\n            \"rel\": \"self\",\n            \"type\": \"application/json\",\n            \"title\": \"this document\"\n        },\n        {\n            \"href\": \"http://data.example.org/collections.html\",\n            \"rel\": \"alternate\",\n            \"type\": \"text/html\",\n            \"title\": \"this document as HTML\"\n        },\n        {\n            \"href\": \"http://schemas.example.org/1.0/foobar.xsd\",\n            \"rel\": \"describedBy\",\n            \"type\": \"application/xml\",\n            \"title\": \"XML schema for Acme Corporation data\"\n        }\n    ],\n    \"collections\": [\n        {\n            \"id\": \"ukv_pressure_levels\",\n            \"title\": \"UKV Model Forecast on UK 2 km Standard Grid pressure levels\",\n            \"description\": \"Pressure level data for the UK V determisitic model\",\n            \"source\": \"Met Office Unified Model\",\n            \"extent\": {\n                \"spatial\": [\n                    -12.01,\n                    48.87,\n                    5.64,\n                    61.03\n                ],\n                \"crs\" : [\"EPSG:4326\"],\n                \"temporal\": [\n                    \"2019-03-01T00:00:00Z/2019-03-05T05:00:00Z\"\n                ],\n                \"trs\" : [\"ISO8601\"],\n                \"vertical\": [\n                    1000,\n                    975,\n                    950,\n                    925,\n                    900,\n                    850,\n                    800,\n                    750\n                ],\n                \"vrs\":[\"ISOBARIC LEVELS\"]\n            },\n        \n            \"parameters\": [\n                \"air_temperature\",\n                \"relative_humidity\"\n            ]\n        }        \n    ]\n}"
+        collectionsResponse:
+            description: 'Metadata required for the query parameters of the Trajectory API'
+            required:
+                - link
+                - collections
+            type: object
+            properties:
+                link:
+                    description: 'Array of links to alternate formats of the document being viewed'
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/link'
+                collections:
+                    description: 'Array of collections'
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/collectionDescription'
+            example: "{\n    \"links\": [\n        {\n            \"href\": \"http://data.example.org/collections.json\",\n            \"rel\": \"self\",\n            \"type\": \"application/json\",\n            \"title\": \"this document\"\n        },\n        {\n            \"href\": \"http://data.example.org/collections.html\",\n            \"rel\": \"alternate\",\n            \"type\": \"text/html\",\n            \"title\": \"this document as HTML\"\n        },\n        {\n            \"href\": \"http://schemas.example.org/1.0/foobar.xsd\",\n            \"rel\": \"describedBy\",\n            \"type\": \"application/xml\",\n            \"title\": \"XML schema for Acme Corporation data\"\n        }\n    ],\n    \"collections\": [\n        {\n            \"id\": \"ukv_pressure_levels\",\n            \"title\": \"UKV Model Forecast on UK 2 km Standard Grid pressure levels\",\n            \"description\": \"Pressure level data for the UK V determisitic model\",\n            \"source\" : \"Met Office Unified Model\",\n            \"outputFormat\": [\n                \"application/x-netcdf\",\n                \"application/x-grib\",\n                \"application/json\"\n            ],\n            \"extent\": {\n                \"spatial\": [ -12.01, 48.87, 5.64, 61.03 ],\n                \"temporal\": [ \"2019-03-01T00:00:00Z/2019-03-05T05:00:00Z\" ],\n                \"vertical\": [1000,975,950,925,900,850,800,750]\n              },            \n            \"parameters\": [\n                {\n                      \"type\" : \"Parameter\",\n                      \"id\" : \"air_temperature\",\n                      \"description\": {\n                      \t\"en\": \"air temperature\"\n                      },\n                      \"unit\" : {\n                        \"label\": {\n                          \"en\": \"kelvin\"\n                        },\n                        \"symbol\": {\n                          \"value\": \"K\",\n                          \"type\": \"http://www.opengis.net/def/uom/UCUM/\"\n                        }\n                      },\n                      \"observedProperty\" : {\n                        \"id\" : \"http://codes.wmo.int/grib2/codeflag/4.2/0-0-0\",\n                        \"label\" : {\n                          \"en\": \"Temperature\"\n                        }\n                      }\n                },\n        {\n        \"id\": \"visibility\",\n        \"type\": \"Parameter\",\n        \"description\": {\n            \"en\": \"Visibility\"\n        },\n        \"unit\": {\n            \"label\": {\n                \"en\": \"metre\"\n            },\n            \"symbol\": {\n                \"value\": \"m\",\n                \"type\": \"http://www.opengis.net/def/uom/UCUM/\"\n            }\n        },\n        \"observedProperty\": {\n            \"id\": \"http://codes.wmo.int/grib2/codeflag/4.2/0-19-0\",\n            \"label\": {\n                \"en\": \"Visibility\"\n            }\n        }\n    }\n            ],\n            \"outputCRS\": [\n                \"EPSG:4326\",\n                \"EPSG:3857\",\n                \"EPSG:27700\"\n            ],\n            \"interpolationX\": [\n                \"linear\",\n                \"nearest_neighbour\"\n            ],\n            \"interpolationY\": [\n                \"linear\",\n                \"nearest_neighbour\"\n            ],\n            \"interpolationZ\": [\n                \"log_pressure\"\n            ]\n        }\n    ]\n}"
+        descriptionInfo:
+            required:
+                - summary
+                - created
+                - axes
+            type: object
+            properties:
+                summary:
+                    description: 'brief description of the collection'
+                    type: string
+                created:
+                    format: dateTime
+                    description: 'time that the coverage collection was created/modified'
+                    type: string
+                axes:
+                    $ref: '#/components/schemas/axesInfo'
+                    description: 'Defines the area information is available for from the collection'
+        axesInfo:
+            required:
+                - x
+                - y
+                - t
+            type: object
+            properties:
+                x:
+                    $ref: '#/components/schemas/axesDefInfo'
+                    description: 'X axis boundaries of the data in the collection'
+                y:
+                    $ref: '#/components/schemas/axesDefInfo'
+                    description: 'Y axis boundaries of the data in the collection'
+                z:
+                    $ref: '#/components/schemas/axesListDefInfo'
+                    description: 'Z axis boundaries of the data in the collection'
+                t:
+                    $ref: '#/components/schemas/axesDefInfo'
+                    description: 'T axis boundaries of the data in the collection'
+            example: "{\n    \"x\": {\n        \"units\": \"some text\",\n        \"lowerBound\": \"some text\",\n        \"upperBound\": \"some text\"\n    },\n    \"y\": {\n        \"units\": \"some text\",\n        \"lowerBound\": \"some text\",\n        \"upperBound\": \"some text\"\n    },\n    \"z\": {\n        \"units\": \"some text\",\n        \"values\": [\n            \"some text\",\n            \"some text\"\n        ]\n    },\n    \"t\": {\n        \"units\": \"some text\",\n        \"lowerBound\": \"some text\",\n        \"upperBound\": \"some text\"\n    }\n}"
+        axesDefInfo:
+            description: 'Definition of the axis coordinate range'
+            required:
+                - units
+                - lowerBound
+                - upperBound
+            type: object
+            properties:
+                units:
+                    $ref: '#/components/schemas/units'
+                    description: 'identifier for the units'
+                lowerBound:
+                    description: 'minimum value of the axes'
+                    type: string
+                upperBound:
+                    description: 'maximum value of the axes'
+                    type: string
+            example: "{\n    \"units\": {\n        \"label\": {\n            \"en\": \"some text\"\n        },\n        \"symbol\": {\n            \"value\": \"some text\",\n            \"type\": \"some text\"\n        }\n    },\n    \"lowerBound\": \"some text\",\n    \"upperBound\": \"some text\"\n}"
+        axesListDefInfo:
+            description: 'Definition for those axis which are not based on regular intervals'
+            required:
+                - units
+                - values
+            type: object
+            properties:
+                units:
+                    $ref: '#/components/schemas/units'
+                    description: 'identifier for the units'
+                values:
+                    description: 'list of the valid values for the axis'
+                    type: array
+                    items:
+                        type: string
+            example: "{\n    \"units\": {\n        \"label\": {\n            \"en\": \"some text\"\n        },\n        \"symbol\": {\n            \"value\": \"some text\",\n            \"type\": \"some text\"\n        }\n    },\n    \"values\": [\n        \"some text\",\n        \"some text\"\n    ]\n}"
+        units:
+            title: 'Root Type for units'
+            description: 'definition of data units'
+            required:
+                - symbol
+                - label
+            type: object
+            properties:
+                label:
+                    type: string
+                    properties:
+                        en:
+                            type: string
+                symbol:
+                    $ref: '#/components/schemas/symbol'
+                    description: 'Description of the symbol for the units'
+                    properties:
+                        value:
+                            type: string
+                        type:
+                            type: string
+            example: "{\n    \"label\": {\n        \"en\": \"<unit Label>\"\n    },\n    \"symbol\": {\n        \"value\": \"<unit symbol>\",\n        \"type\": \"<href to unit metadata description>\"\n    }\n}"
+        symbol:
+            title: 'Root Type for symbol'
+            description: 'Information about the symbol used to describe the units'
+            required:
+                - value
+                - type
+            type: object
+            properties:
+                value:
+                    $ref: '#/components/schemas/link'
+                    description: 'link to a registry which gives futher infromation about the units'
+                type:
+                    description: 'The standard recognised symbol to describe the units'
+                    type: string
+            example: "{\n    \"value\": \"hPa\",\n    \"type\": \"http://www.opengis.net/def/uom/UCUM/\"\n}"
+        CoverageJSON:
+            title: 'Root Type for CoverageJSON'
+            description: 'JSON output format '
+            required:
+                - type
+                - domain
+                - parameters
+                - ranges
+            type: object
+            properties:
+                type:
+                    description: 'Coverage domain type'
+                    enum:
+                        - Coverage
+                domain:
+                    $ref: '#/components/schemas/Domain'
+                    description: 'Geotemporal domain definition'
+                    properties:
+                        type:
+                            type: string
+                        domainType:
+                            type: string
+                        axes:
+                            type: object
+                            properties:
+                                x:
+                                    type: object
+                                    properties:
+                                        values:
+                                            type: array
+                                            items: {}
+                                y:
+                                    type: object
+                                    properties:
+                                        values:
+                                            type: array
+                                            items: {}
+                                z:
+                                    type: object
+                                    properties:
+                                        values:
+                                            type: array
+                                            items: {}
+                                t:
+                                    type: object
+                                    properties:
+                                        values:
+                                            type: array
+                                            items: {}
+                        referencing:
+                            type: array
+                            items: {}
+                parameters:
+                    $ref: '#/components/schemas/Parameter'
+                    description: "A set of objects (one for each parameter) which describe the data values \ncontained within the JSON"
+                    properties:
+                        ICEC:
+                            type: object
+                            properties:
+                                type:
+                                    type: string
+                                description:
+                                    type: object
+                                    properties:
+                                        en:
+                                            type: string
+                                unit:
+                                    type: object
+                                    properties:
+                                        label:
+                                            type: object
+                                            properties:
+                                                en:
+                                                    type: string
+                                        symbol:
+                                            type: object
+                                            properties:
+                                                value:
+                                                    type: string
+                                                type:
+                                                    type: string
+                                observedProperty:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: string
+                                        label:
+                                            type: object
+                                            properties:
+                                                en:
+                                                    type: string
+                ranges:
+                    $ref: '#/components/schemas/range'
+                    description: 'A set of objects (one for each parameter) which contain the data values'
+                    properties:
+                        ICEC:
+                            type: object
+                            properties:
+                                type:
+                                    type: string
+                                dataType:
+                                    type: string
+                                axisNames:
+                                    type: array
+                                    items: {}
+                                shape:
+                                    type: array
+                                    items: {}
+                                values:
+                                    type: array
+                                    items: {}
+            example: "{\n  \"type\" : \"Coverage\",\n  \"domain\" : {\n    \"type\" : \"Domain\",\n    \"domainType\" : \"Grid\",\n    \"axes\": {\n      \"composite\": {\n        \"dataType\": \"tuple\",\n        \"coordinates\": [\"t\",\"x\",\"y\",\"z\"],\n        \"values\": [\n          [\"2010-01-01T00:12:20Z\", -10, 40, 5],\n          [\"2010-01-01T00:14:20Z\", -5, 50, 4],\n          [\"2010-01-01T00:16:20Z\", -6, 50, 5]\n        ]\n      }\n    },\n    \"referencing\": [{\n      \"coordinates\": [\"t\"],\n      \"system\": {\n        \"type\": \"TemporalRS\",\n        \"calendar\": \"Gregorian\"\n      }\n    }, {\n      \"coordinates\": [\"y\",\"x\",\"z\"],\n      \"system\": {\n        \"type\": \"GeographicCRS\",\n        \"id\": \"http://www.opengis.net/def/crs/EPSG/0/4979\"\n      }\n    }]\n  },\n  \"parameters\" : {\n    \"ICEC\": {\n      \"type\" : \"Parameter\",\n      \"description\" : {\n      \t\"en\": \"Sea Ice concentration (ice=1;no ice=0)\"\n      },\n      \"unit\" : {\n        \"label\": {\n          \"en\": \"Ratio\"\n        },\n        \"symbol\": {\n          \"value\": \"1\",\n          \"type\": \"http://www.opengis.net/def/uom/UCUM/\"\n        }\n      },\n      \"observedProperty\" : {\n        \"id\" : \"http://vocab.nerc.ac.uk/standard_name/sea_ice_area_fraction/\",\n        \"label\" : {\n          \"en\": \"Sea Ice Concentration\"\n        }\n      }\n    }\n  },\n  \"ranges\" : {\n    \"ICEC\" : {\n      \"type\" : \"NdArray\",\n      \"dataType\": \"float\",\n      \"axisNames\": [\"composite\"],\n      \"shape\": [3],\n      \"values\" : [ 0.1, 0.2, 0.1 ]\n    }\n  }\n}"
+        Domain:
+            title: 'Root Type for Domain'
+            description: 'Coverage geotemporal area description'
+            required:
+                - axes
+                - domainType
+                - type
+            type: object
+            properties:
+                type:
+                    description: Type
+                    enum:
+                        - Domain
+                domainType:
+                    description: 'Domain type'
+                    enum:
+                        - Grid
+                axes:
+                    $ref: '#/components/schemas/axes'
+                    description: 'Geotemporal coordinate definition'
+                    properties:
+                        x:
+                            type: object
+                            properties:
+                                values:
+                                    type: array
+                                    items: {}
+                        y:
+                            type: object
+                            properties:
+                                values:
+                                    type: array
+                                    items: {}
+                        z:
+                            type: object
+                            properties:
+                                values:
+                                    type: array
+                                    items: {}
+                        t:
+                            type: object
+                            properties:
+                                values:
+                                    type: array
+                                    items: {}
+            example: "{\n    \"type\" : \"Domain\",\n    \"domainType\" : \"Grid\",\n    \"axes\": {\n      \"x\" : { \"values\": [-10,-5,0] },\n      \"y\" : { \"values\": [40,50] },\n      \"z\" : { \"values\": [ 5] },\n      \"t\" : { \"values\": [\"2010-01-01T00:12:20Z\"] }\n    }\n}"
+        axes:
+            title: 'Root Type for axes'
+            description: 'geotemporal axes for a CoverageJSON domain'
+            required:
+                - t
+                - x
+                - y
+            type: object
+            properties:
+                x:
+                    $ref: '#/components/schemas/numeric_axis_values'
+                    description: 'X axis coordinates'
+                    properties:
+                        values:
+                            type: array
+                            items: {}
+                y:
+                    $ref: '#/components/schemas/numeric_axis_values'
+                    description: 'Y axis coordinates'
+                    properties:
+                        values:
+                            type: array
+                            items: {}
+                z:
+                    description: 'Z axis coordinates'
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/string_axis_values'
+                    properties:
+                        values:
+                            type: array
+                            items: {}
+                t:
+                    $ref: '#/components/schemas/string_axis_values'
+                    description: 'Time coordinates'
+                    properties:
+                        values:
+                            type: array
+                            items: {}
+            example: "{\n    \"x\": {\n        \"values\": [\n            -10,\n            -5,\n            0\n        ]\n    },\n    \"y\": {\n        \"values\": [\n            40,\n            50\n        ]\n    },\n    \"z\": {\n        \"values\": [\n            5\n        ]\n    },\n    \"t\": {\n        \"values\": [\n            \"2010-01-01T00:12:20Z\"\n        ]\n    }\n}"
+        numeric_axis_values:
+            title: 'Root Type for numeric_axis_values'
+            description: 'numeric coordinates definition'
+            required:
+                - values
+            type: object
+            properties:
+                values:
+                    description: 'Array of numeric values'
+                    type: array
+                    items:
+                        type: number
+            example: "[\n    -10,\n    -5,\n    0\n]"
+        string_axis_values:
+            title: 'Root Type for numeric_axis_values'
+            description: 'string coordinates definition'
+            required:
+                - values
+            type: object
+            properties:
+                values:
+                    description: 'Array of numeric values'
+                    type: array
+                    items:
+                        type: string
+            example: "[\n        \"2010-01-01T00:12:20Z\",\n        \"2010-01-02T00:12:20Z\"\n]"
+        Parameter:
+            title: 'Root Type for Parameter'
+            description: 'Definition of data parameter'
+            required:
+                - type
+                - unit
+                - description
+                - observedProperty
+                - id
+            type: object
+            properties:
+                type:
+                    description: type
+                    enum:
+                        - Parameter
+                description:
+                    $ref: '#/components/schemas/descriptionInfo'
+                    description: 'Units description'
+                    properties:
+                        en:
+                            type: string
+                unit:
+                    $ref: '#/components/schemas/units'
+                    description: 'Unit description'
+                    properties:
+                        label:
+                            type: object
+                            properties:
+                                en:
+                                    type: string
+                        symbol:
+                            type: object
+                            properties:
+                                value:
+                                    type: string
+                                type:
+                                    type: string
+                observedProperty:
+                    $ref: '#/components/schemas/ObservedProperty'
+                    description: 'Observered property definitions'
+                    properties:
+                        id:
+                            type: string
+                        label:
+                            type: object
+                            properties:
+                                en:
+                                    type: string
+                id:
+                    description: 'Unique ID of the parameter, this is the value used for querying the data'
+                    type: string
+            example: "{\n      \"type\" : \"Parameter\",\n      \"id\" : \"sea_ice\",\n      \"description\": {\n      \t\"en\": \"Sea Ice concentration (ice=1;no ice=0)\"\n      },\n      \"unit\" : {\n        \"label\": {\n          \"en\": \"Ratio\"\n        },\n        \"symbol\": {\n          \"value\": \"1\",\n          \"type\": \"http://www.opengis.net/def/uom/UCUM/\"\n        }\n      },\n      \"observedProperty\" : {\n        \"id\" : \"http://vocab.nerc.ac.uk/standard_name/sea_ice_area_fraction/\",\n        \"label\" : {\n          \"en\": \"Sea Ice Concentration\"\n        }\n      }\n}"
+        ObservedProperty:
+            title: 'Root Type for ObservedProperty'
+            description: 'Observed property detail'
+            required:
+                - id
+                - label
+            type: object
+            properties:
+                id:
+                    description: "URI linking to an external registry which contains the definitive definition of\nthe observed property"
+                    type: string
+                label:
+                    $ref: '#/components/schemas/descriptionInfo'
+                    description: "a series of entries (one for each supported language which follow the \ni18n convention  "
+                    properties:
+                        en:
+                            type: string
+            example: "{\n    \"id\": \"http://vocab.nerc.ac.uk/standard_name/sea_ice_area_fraction/\",\n    \"label\": {\n        \"en\": \"Sea Ice Concentration\"\n    }\n}"
+        range:
+            title: 'Root Type for range'
+            description: 'Data values for a parameter'
+            required:
+                - type
+                - dataType
+                - values
+                - axisNames
+            type: object
+            properties:
+                type:
+                    description: 'Definition of the data structure'
+                    enum:
+                        - NdArray
+                dataType:
+                    description: 'Format of the data values in the array'
+                    enum:
+                        - int
+                        - long
+                        - float
+                        - double
+                        - string
+                axisNames:
+                    description: 'References to the axes the data values map to'
+                    type: array
+                    items:
+                        type: string
+                shape:
+                    description: 'Structure of the array data'
+                    type: array
+                    items:
+                        type: number
+                values:
+                    description: 'Parameter data values'
+                    type: array
+                    items: {}
+            example: "{\n  \"type\" : \"NdArray\",\n  \"dataType\": \"float\",\n  \"axisNames\": [\"t\",\"z\",\"y\",\"x\"],\n  \"shape\": [1, 1, 2, 3],\n  \"values\" : [ 0.5, 0.6, 0.4, 0.6, 0.2, null ]\n}"
+        collectionDetail:
+            required:
+                - extent
+                - id
+                - parameters
+            type: object
+            properties:
+                id:
+                    description: collectionID
+                    type: string
+                title:
+                    description: 'Label text for the collection'
+                    type: string
+                description:
+                    description: 'Description of the collection'
+                    type: string
+                source:
+                    description: 'Information about the underlying datasource of the collection '
+                    type: string
+                extent:
+                    $ref: '#/components/schemas/extent'
+                    description: 'Definition of the Geo-Temporal extent of the information in the collection'
+                    properties:
+                        spatial:
+                            type: array
+                            items: {}
+                        temporal:
+                            type: array
+                            items: {}
+                        vertical:
+                            type: array
+                            items: {}
+                parameters:
+                    description: 'List of the the data parameters available in the collection'
+                    type: array
+                    items:
+                        type: string
+            example: "{\n    \"id\": \"ukv_pressure_levels\",\n    \"title\": \"UKV Model Forecast on UK 2 km Standard Grid pressure levels\",\n    \"description\": \"Pressure level data for the UK V determisitic model\",\n    \"source\": \"Met Office Unified Model\",\n    \"extent\": {\n        \"spatial\": [\n            -12.01,\n            48.87,\n            5.64,\n            61.03\n        ],\n        \"crs\" : [\"EPSG:4326\"],\n        \"temporal\": [\n            \"2019-03-01T00:00:00Z/2019-03-05T05:00:00Z\"\n        ],\n        \"trs\" : [\"ISO8601\"],\n        \"vertical\": [\n            1000,\n            975,\n            950,\n            925,\n            900,\n            850,\n            800,\n            750\n        ],\n        \"vrs\":[\"ISOBARIC LEVELS\"]\n    },\n\n    \"parameters\": [\n        \"air_temperature\",\n        \"relative_humidity\"\n    ]\n}"
+        collectionResponse:
+            description: 'Metadata about the chosen collection'
+            required:
+                - link
+                - collections
+            type: object
+            properties:
+                link:
+                    description: 'Array of links to alternate formats of the document being viewed'
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/link'
+                collection:
+                    $ref: '#/components/schemas/collectionDescription'
+                    description: 'collection metadata'
+            example: "{\n    \"links\": [\n        {\n            \"href\": \"http://data.example.org/collections.json\",\n            \"rel\": \"self\",\n            \"type\": \"application/json\",\n            \"title\": \"this document\"\n        },\n        {\n            \"href\": \"http://data.example.org/collections.html\",\n            \"rel\": \"alternate\",\n            \"type\": \"text/html\",\n            \"title\": \"this document as HTML\"\n        },\n        {\n            \"href\": \"http://schemas.example.org/1.0/foobar.xsd\",\n            \"rel\": \"describedBy\",\n            \"type\": \"application/xml\",\n            \"title\": \"XML schema for Acme Corporation data\"\n        }\n    ],\n    \"collection\": \n        {\n            \"id\": \"ukv_pressure_levels\",\n            \"title\": \"UKV Model Forecast on UK 2 km Standard Grid pressure levels\",\n            \"description\": \"Pressure level data for the UK V determisitic model\",\n            \"source\" : \"Met Office Unified Model\",\n            \"outputFormat\": [\n                \"application/x-netcdf\",\n                \"application/x-grib\",\n                \"application/json\"\n            ],\n            \"extent\": {\n                \"spatial\": [ -12.01, 48.87, 5.64, 61.03 ],\n                \"temporal\": [ \"2019-03-01T00:00:00Z/2019-03-05T05:00:00Z\" ],\n                \"vertical\": [1000,975,950,925,900,850,800,750]\n              },            \n            \"parameters\": [\n                {\n                      \"type\" : \"Parameter\",\n                      \"id\" : \"air_temperature\",\n                      \"description\": {\n                      \t\"en\": \"air temperature\"\n                      },\n                      \"unit\" : {\n                        \"label\": {\n                          \"en\": \"kelvin\"\n                        },\n                        \"symbol\": {\n                          \"value\": \"K\",\n                          \"type\": \"http://www.opengis.net/def/uom/UCUM/\"\n                        }\n                      },\n                      \"observedProperty\" : {\n                        \"id\" : \"http://codes.wmo.int/grib2/codeflag/4.2/0-0-0\",\n                        \"label\" : {\n                          \"en\": \"Temperature\"\n                        }\n                      }\n                },\n        {\n        \"id\": \"visibility\",\n        \"type\": \"Parameter\",\n        \"description\": {\n            \"en\": \"Visibility\"\n        },\n        \"unit\": {\n            \"label\": {\n                \"en\": \"metre\"\n            },\n            \"symbol\": {\n                \"value\": \"m\",\n                \"type\": \"http://www.opengis.net/def/uom/UCUM/\"\n            }\n        },\n        \"observedProperty\": {\n            \"id\": \"http://codes.wmo.int/grib2/codeflag/4.2/0-19-0\",\n            \"label\": {\n                \"en\": \"Visibility\"\n            }\n        }\n    }\n            ],\n            \"outputCRS\": [\n                \"EPSG:4326\",\n                \"EPSG:3857\",\n                \"EPSG:27700\"\n            ],\n            \"interpolationX\": [\n                \"linear\",\n                \"nearest_neighbour\"\n            ],\n            \"interpolationY\": [\n                \"linear\",\n                \"nearest_neighbour\"\n            ],\n            \"interpolationZ\": [\n                \"log_pressure\"\n            ]\n        }\n    \n}"
+        collectionDescription:
+            title: 'Root Type for collectionDescription'
+            description: 'Metadata which describes the collection'
+            required:
+                - extent
+                - id
+                - outputFormat
+                - outputCRS
+                - parameters
+            type: object
+            properties:
+                id:
+                    description: collectionID
+                    type: string
+                title:
+                    description: 'Label text for the collection'
+                    type: string
+                description:
+                    description: 'Description of the collection'
+                    type: string
+                source:
+                    description: 'Information about the underlying datasource of the collection '
+                    type: string
+                outputFormat:
+                    description: 'List of the supported output formats for the collection'
+                    type: array
+                    items:
+                        type: string
+                extent:
+                    $ref: '#/components/schemas/extent'
+                    description: 'Definition of the Geo-Temporal extent of the information in the collection'
+                    properties:
+                        coordinates:
+                            type: array
+                            items: {}
+                        wkt:
+                            type: string
+                        horizontal:
+                            type: array
+                            items: {}
+                        temporal:
+                            type: array
+                            items: {}
+                        vertical:
+                            type: array
+                            items: {}
+                parameters:
+                    description: 'Metadata describing the data parameters available in the collection'
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Parameter'
+                outputCRS:
+                    description: 'List of the output coordinate reference systems supported for the collection'
+                    type: array
+                    items:
+                        type: string
+                interpolation:
+                    description: 'List of the available interpolation algorithms'
+                    type: array
+                    items:
+                        type: string
+            example: "{\n    \"id\": \"ukv_surface_data\",\n    \"title\": \"UKV Model Forecast on UK 2 km Standard Grid pressure levels\",\n    \"description\": \"Surface data for the UK V determisitic model\",\n    \"source\": \"Met Office Unified Model\",\n    \"outputFormat\": [\n        \"application/x-netcdf\",\n        \"application/x-grib\",\n        \"application/json\"\n    ],\n    \"extent\": {\n        \"dimensions\": {\n            \"x\": 92,\n            \"y\": 33,\n            \"z\": 8,\n            \"time\": 98\n        },\n        \"wkt\": \"GEOGCS[\\\"WGS 84\\\",DATUM[\\\"WGS_1984\\\",SPHEROID[\\\"WGS 84\\\",6378137,298.257223563,AUTHORITY[\\\"EPSG\\\",\\\"7030\\\"]],AUTHORITY[\\\"EPSG\\\",\\\"6326\\\"]],PRIMEM[\\\"Greenwich\\\",0,AUTHORITY[\\\"EPSG\\\",\\\"8901\\\"]],UNIT[\\\"degree\\\",0.01745329251994328,AUTHORITY[\\\"EPSG\\\",\\\"9122\\\"]],AUTHORITY[\\\"EPSG\\\",\\\"4326\\\"],TIMEEXTENT[2019-05-28T06:00:00Z,2019-05-30T06:00:00Z],VERTICALEXTENT[2.0,2.0,LENGTHUNIT[\\\"metre\\\",1.0]]]\",\n        \"horizontal\": {\n            \"name\": [\"longitude\",\"latitude\"],\n            \"coordinates\": [\n                \"x\",\n                \"y\"\n            ],\n            \"geographic\": \"BBOX[359.875,90.125,-0.125,-90.125]\"\n        },\n        \"vertical\": {\n            \"name\": [\"height_above_ground\"],\n            \"coordinates\": [\"z\"],\n            \"range\": [\n                36.47,\n                99.07\n            ]\n        },\n        \"temporal\": {\n            \"name\": \"time\",\n            \"coordinates\": [\"time\"],\n            \"range\": [\n                \"2019-05-28T06:00:00Z\",\n                \"2019-05-28T18:00:00Z\",\n                \"2019-05-29T06:00:00Z\",\n                \"2019-05-29T18:00:00Z\",\n                \"2019-05-30T06:00:00Z\"\n            ]\n        }\n    },\n    \"parameters\": [\n                {\n                      \"type\" : \"Parameter\",\n                      \"id\" : \"air_temperature\",\n                      \"description\": {\n                      \t\"en\": \"air temperature\"\n                      },\n                      \"unit\" : {\n                        \"label\": {\n                          \"en\": \"kelvin\"\n                        },\n                        \"symbol\": {\n                          \"value\": \"K\",\n                          \"type\": \"http://www.opengis.net/def/uom/UCUM/\"\n                        }\n                      },\n                      \"observedProperty\" : {\n                        \"id\" : \"http://codes.wmo.int/grib2/codeflag/4.2/0-0-0\",\n                        \"label\" : {\n                          \"en\": \"Temperature\"\n                        }\n                      }\n                },\n        {\n        \"id\": \"visibility\",\n        \"type\": \"Parameter\",\n        \"description\": {\n            \"en\": \"Visibility\"\n        },\n        \"unit\": {\n            \"label\": {\n                \"en\": \"metre\"\n            },\n            \"symbol\": {\n                \"value\": \"m\",\n                \"type\": \"http://www.opengis.net/def/uom/UCUM/\"\n            }\n        },\n        \"observedProperty\": {\n            \"id\": \"http://codes.wmo.int/grib2/codeflag/4.2/0-19-0\",\n            \"label\": {\n                \"en\": \"Visibility\"\n            }\n        }\n    }\n    ],\n    \"outputCRS\": [\n        \"EPSG:4326\",\n        \"EPSG:3857\",\n        \"EPSG:27700\"\n    ],\n    \"interpolationX\": [\n        \"linear\",\n        \"nearest_neighbour\"\n    ],\n    \"interpolationY\": [\n        \"linear\",\n        \"nearest_neighbour\"\n    ]\n}"
+        extent:
+            description: 'Definition of the geo-temporal extent of the collection'
+            required:
+                - dimensions
+                - wkt
+                - horizontal
+            type: object
+            properties:
+                dimensions:
+                    $ref: '#/components/schemas/dimension'
+                    description: 'The resolution of the collection'
+                wkt:
+                    description: "Well Known Text description of the collections coordinate reference system\n\nsee http://docs.opengeospatial.org/is/12-063r5/12-063r5.html"
+                    type: string
+                horizontal:
+                    $ref: '#/components/schemas/horizontal'
+                    description: 'Definition of the collection spatial dimensions'
+                vertical:
+                    $ref: '#/components/schemas/vertical'
+                    description: 'definition of the collection vertical dimensions'
+                temporal:
+                    $ref: '#/components/schemas/temporal'
+                    description: 'Definition of the collection time dimensions'
+            example: "{\n        \"dimensions\": {\n            \"x\": 92,\n            \"y\": 33,\n            \"z\": 8,\n            \"time\": 98\n        },\n        \"wkt\": \"GEOGCS[\\\"WGS 84\\\",DATUM[\\\"WGS_1984\\\",SPHEROID[\\\"WGS 84\\\",6378137,298.257223563,AUTHORITY[\\\"EPSG\\\",\\\"7030\\\"]],AUTHORITY[\\\"EPSG\\\",\\\"6326\\\"]],PRIMEM[\\\"Greenwich\\\",0,AUTHORITY[\\\"EPSG\\\",\\\"8901\\\"]],UNIT[\\\"degree\\\",0.01745329251994328,AUTHORITY[\\\"EPSG\\\",\\\"9122\\\"]],AUTHORITY[\\\"EPSG\\\",\\\"4326\\\"],TIMEEXTENT[2019-05-28T06:00:00Z,2019-05-30T06:00:00Z],VERTICALEXTENT[2.0,2.0,LENGTHUNIT[\\\"metre\\\",1.0]]]\",\n        \"horizontal\": {\n            \"name\": [\"longitude\",\"latitude\"],\n            \"coordinates\": [\n                \"x\",\n                \"y\"\n            ],\n            \"geographic\": \"BBOX[359.875,90.125,-0.125,-90.125]\"\n        },\n        \"vertical\": {\n            \"name\": [\"height_above_ground\"],\n            \"coordinates\": [\"z\"],\n            \"range\": [\n                36.47,\n                99.07\n            ]\n        },\n        \"temporal\": {\n            \"name\": \"time\",\n            \"coordinates\": [\"time\"],\n            \"range\": [\n                \"2019-05-28T06:00:00Z\",\n                \"2019-05-28T18:00:00Z\",\n                \"2019-05-29T06:00:00Z\",\n                \"2019-05-29T18:00:00Z\",\n                \"2019-05-30T06:00:00Z\"\n            ]\n        }\n    }"
+        dimension:
+            title: 'Root Type for dimension'
+            description: 'definition of the resolution of the collection'
+            required:
+                - x
+                - y
+            type: object
+            properties:
+                x:
+                    format: int32
+                    description: 'x coordinate resolution'
+                    type: integer
+                y:
+                    format: int32
+                    description: 'y coordinate resolution'
+                    type: integer
+                z:
+                    format: int32
+                    description: 'vertical level resolution'
+                    type: integer
+                time:
+                    format: int32
+                    description: 'Time step resolution'
+                    type: integer
+            example: "{\n    \"x\": 720,\n    \"y\": 360,\n    \"z\": 1,\n    \"time\": 5\n}"
+        horizontal:
+            title: 'Root Type for horizontal'
+            description: 'Definition of the spatial aspects of the collection'
+            required:
+                - coordinates
+                - geographic
+            type: object
+            properties:
+                name:
+                    description: 'A list of the names of the coordinates MUST be in the same order as the values in the coordinates array'
+                    type: array
+                    items: {}
+                coordinates:
+                    description: 'A list of the coordinates'
+                    type: array
+                    items:
+                        type: string
+                geographic:
+                    description: 'Definition of the area covered by the collection as a Well Know Text Bounding Box'
+                    type: string
+            example: "{\n    \"name\": [\n        \"longitude\",\n        \"latitude\"\n    ],\n    \"coordinates\": [\n        \"x\",\n        \"y\"\n    ],\n    \"geographic\": \"BBOX[359.875,90.125,-0.125,-90.125]\"\n}"
+        vertical:
+            title: 'Root Type for vertical'
+            description: 'Description of the vertical dimensions of the collection '
+            required:
+                - name
+                - coordinates
+                - range
+            type: object
+            properties:
+                name:
+                    description: 'Name of the coordinates'
+                    type: array
+                    items:
+                        type: string
+                coordinates:
+                    description: coordinate
+                    type: array
+                    items:
+                        type: string
+                range:
+                    type: array
+                    items:
+                        type: number
+            example: "{\n    \"name\": [\n        \"height_above_ground\"\n    ],\n    \"coordinates\": [\n        \"z\"\n    ],\n    \"range\": [\n        2\n    ]\n}"
+        temporal:
+            title: 'Root Type for temporal'
+            description: 'Description of the time dimensions of the collection'
+            required:
+                - coordinates
+                - name
+                - range
+            type: object
+            properties:
+                name:
+                    description: 'Array of coordinate names MUST be in the same order as the coordinates array'
+                    type: string
+                coordinates:
+                    description: 'Coordinate axes names'
+                    type: array
+                    items:
+                        type: string
+                range:
+                    description: 'List of the available time dimension values in the collection'
+                    type: array
+                    items:
+                        type: string
+            example: "{\n    \"name\": \"time\",\n    \"coordinates\": [\n        \"time\"\n    ],\n    \"range\": [\n        \"2019-05-28T06:00:00Z\",\n        \"2019-05-28T18:00:00Z\",\n        \"2019-05-29T06:00:00Z\",\n        \"2019-05-29T18:00:00Z\",\n        \"2019-05-30T06:00:00Z\"\n    ]\n}"
+    parameters:
+        bbox:
+            name: bbox
+            in: query
+            description: 'Only Coverages that have a geometry that intersects the bounding box are selected. The bounding box is provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (elevation or depth): * Lower left corner, coordinate axis 1 * Lower left corner, coordinate axis 2 * Lower left corner, coordinate axis 3 (optional) * Upper right corner, coordinate axis 1 * Upper right corner, coordinate axis 2 * Upper right corner, coordinate axis 3 (optional) The coordinate reference system of the values is WGS84 longitude/latitude (https://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in the parameter bbox-crs. For WGS84 longitude/latitude the values are in most cases the sequence of minimum longitude, minimum latitude, maximum longitude and maximum latitude. However, in cases where the box spans the antimeridian the first value (west-most box edge) is larger than the third value (east-most box edge). If a coverage has multiple spatial geometry properties, it is the decision of the server whether only a single spatial geometry property is used to determine the extent or all relevant geometries. '
+            required: false
+            style: form
+            explode: false
+            schema:
+                maxItems: 6
+                minItems: 4
+                type: array
+                items:
+                    type: number
+        time:
+            name: time
+            in: query
+            description: 'Either a date-time or a period string that adheres to RFC 3339. Examples: * A date-time: 2018-02-12T23:20:50Z * A period: 2018-02-12T00:00:00Z/2018-03-18T12:31:12Z or 2018-02-12T00:00:00Z/P1M6DT12H31M12S Only coverages that have a temporal property that intersects the value of time are selected. If a coverage has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties.'
+            required: false
+            style: form
+            explode: false
+            schema:
+                type: string
+        collectionId:
+            name: collectionId
+            in: path
+            description: 'Identifier (name) of a specific collection'
+            required: true
+            schema:
+                enum:
+                    - GetMap
+                type: string
+    securitySchemes:
+        x-api-key:
+            type: apiKey
+            name: x-api-key
+            in: header
+security:
+    -
+        x-api-key: []
+tags:
+    -
+        name: Capabilities
+        description: 'Essential characteristics of this API including information about the data.'
+    -
+        name: Data
+        description: 'Retrive the required information based on query parameters'
