@@ -23,11 +23,13 @@ The deliverables of this Working Group are described in the Working Group Charte
 
 **1. Use Cases and Requirements**<dd>A set of documents setting out the range of problems that the Sub Group are trying to solve along with a set of requirements that meet the demands of these use cases.</dd>
 
-**2. Weather on the Web Best Practices**<dd>A range of examples and descriptions of how to integrate weather information on the web.</dd>
+**2. Weather on the Web APIs Engineering Report** <dd> A document that describes the experiences of various 'proof-of-concept' and prototyping implementations, outcomes of hackathons and recommendations for future work. This document is in a separate [repository](https://github.com/opengeospatial/weather-on-the-web-ER).</dd> 
 
-**3. Core Specification**<dd>A document describing the standard specification required to meet the needs of the use cases.</dd>
+**3. Weather on the Web Best Practices**<dd>A range of examples and descriptions of how to integrate weather information on the web.</dd>
 
-**4. Business Case**<dd>A document outlining the benefits of Weather on the Web.</dd>
+**4. Core Specification**<dd>A document describing the standard specification required to meet the needs of the use cases.</dd>
+
+**5. Business Case**<dd>A document outlining the benefits of Weather on the Web.</dd>
 
 ## Folder structure
 The files of the master branch are structured so that each deliverable has its own folder:
