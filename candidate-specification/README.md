@@ -68,7 +68,7 @@ collections provided by the server.
 
 # Specification details 
 
-Documenation for the candidate is available at:
+Documentation for the candidate is available at:
 
 * [Weather on the Web](wotw.adoc)
 
