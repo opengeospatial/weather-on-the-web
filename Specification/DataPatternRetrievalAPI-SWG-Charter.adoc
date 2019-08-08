@@ -75,27 +75,29 @@ Please feel free to forward this announcement to any other appropriate lists. Th
 
 == Purpose of the Standards Working Group
 
-The Data Retrieval Pattern API Standards Working Group will standardise some APIs, defined with OpenAPI Version 3, to retrieve various commmon data patterns from a data cube. The data patterns will include, but are not restricted to, data at a point in space and time, time series at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon.  
+The Data Retrieval Pattern API Standards Working Group will standardise some APIs, defined with OpenAPI Version 3, to retrieve various commmon data patterns from a data cube. The data patterns will include, but are not restricted to, data at a point in space and time, time series at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon or rectangular tile.  
 
 == Business Value Proposition
 
-Much environmental data is truly 'Big Data', in that it cannot be readily copied and distributed in sensible timescales for many uses. By specifying precisely the data required in a convenient pattern familiar to the user, a service provider can extract and serve the requested data, simplying access for the user, and hiding the service implementation details, while being scaleable both in terms of the underlying data cube volume and the number of supported simultaneous users. 
+Much environmental data is truly 'Big Data', in that it cannot be readily copied and distributed in sensible timescales for many uses. By specifying precisely just the data required in a convenient pattern familiar to the user, a service provider can extract and serve the requested data, simplying access for the user, and hiding the service implementation details, while being scaleable both in terms of the underlying data cube volume and the number of supported simultaneous users. 
 
-It is envisaged that the standard will be consistent with the strategic direction established by Web Feature Service Version 3 and the future OWS Common for Web Services, but will also be consistent with similar approaches outside the geospatial domain allowing a wide range of data to be combined in innovative ways.
+By using stable, standardised, service APIs based on simple data retrieval patterns, it is envisaged that access and use of data and information will be enabled in different domains, including geospatial, enabling more innovation and value.
 
-The service APIs will support both traditional and cloud-based approaches to computing and also enable a mix of public and private business models on a 'level playing field'. 
- 
-== Scope of Work
+It is envisaged that the standard will be consistent with the strategic direction established by Web Feature Service Version 3 and the future OWS Common for Web Services.
 
-The original requirements for this standard were evolved in the Met Ocean Domain Working Group, but it is envisaged that many of the data patterns are applicable in other environmental sciences, or even other domains.
+The service APIs will support both traditional and cloud-based approaches to computing and also enable a mix of public and private business models on a 'level playing field'. For example, no one country is capable of supplying weather forecast data at the highest useful resolutions for the whole globe, so a distributed scalable approach is essential, enabling both advanced countries and the Least Developed Countries contribute to global strategic intiatives of sustainability and development.
+
+ == Scope of Work
+
+The original requirements for this standard were evolved in the Met Ocean Domain Working Group, but it is envisaged that many of the common data patterns are applicable in other environmental sciences, or even other domains. The data retrieval patterns to access weather and climate data have been stable for many years. Such patterns include, but are not restricted to, point data, time-series at a point, vertical profiles, trajectories (whether in 2, 3 or 4 dimensions), polygons, or rectangular tiles.
 
 There are two main use cases: 
 
-1. An end user requires some data for a specific, familiar purpose, such as a forecast surface temperature at a point or over an area, or wind speed and direction along a proposed trajectory or route, but the user does not need the full range of data that modern weather or climate predictions engender.
+1. An end user requires some convenient data for a specific, familiar purpose, such as a forecast surface temperature at a point or over an area, or wind speed and direction along a proposed trajectory or route, but the user does not need the full range of data that modern weather or climate predictions, or other Big Data systems, engender.
 
 2. A service provider of many value-added products and information services needs an architecture that decouples the provision of data to many evolving distributed applications from the underlying stable, operational, centrallised bulk data production systems. 
 
-The underlying bulk 'data cube' may be based on regular calculation grids, or may be point-cloud observation based.
+The underlying bulk 'data cube' may be based on regular calculation grids, or may be point-cloud observation based, or other structures.
 
 === Statement of relationship of planned work to the current OGC standards baseline
 
@@ -107,15 +109,18 @@ It is planned that once the SWG is established, a candidate standard will be dev
 
 === What is Out of Scope?
 
-////
-A short description of any activities that will be out of scope for the SWG. For example, a SWG may limit consideration of CRPs after a specified date or milestone.
-////
+The SWG will only standardise data retrieval orientated APIs, not product-based APIs that need business specific logic and rules.
+
+Initially, the SWG will not standardise any data patterns other than: point, timeseries, vertical profile, trajectory, corridor, polygon or rectangular tile.
 
 === Specific Existing Work Used as Starting Point
 
-////
-This section provides reference information relevant to the work of the SWG. For example, a document reference for a draft submission or a list of CRPs for a SWG focused on revision to an adopted specification.
-////
+The SWG work is based on:
+1. The Met Ocean Domain WG work to specify various Best Practices;
+2. The WCS Met Ocean Application profiles done in the WCS SWG;
+3. A Met Ocean DWG Hackathon held in December 2018 in Washington DC, USA;
+4. The OGC Hackathon held in June 2019 in London, England, UK;
+5. The Weather on the Web API Engineering Report.
 
 === Is This a Persistent SWG
 
@@ -125,9 +130,7 @@ This section provides reference information relevant to the work of the SWG. For
 
 === When can the SWG be Inactivated
 
-////
-If this is not a persistent SWG, please define the criteria for determining when the SWG can be inactivated and the project archived. Please note that completion and archiving ensures that all files, wikis, emails, and so forth are archived and available for future viewing and use.
-////
+As there are several data pattern APIs to be standardised, Persistent SWG status is proposed, but when all the initial deliverables are finished, inactivation will be considered.
 
 == Description of deliverables
 
@@ -207,18 +210,18 @@ The work of the SWG will be carried out primarily by email and conference calls,
 The following people support this proposal and are committed to the Charter and projected meeting schedule. These members are known as SWG Founding or Charter members. The charter members agree to the SoW and IPR terms as defined in this charter. The charter members have voting rights beginning the day the SWG is officially formed. Charter Members are shown on the public SWG page. Extend the table as necessary.
 
 |===
-|Name |Organization
-| |
+|Name             |Organization
+|Chris Little     |UK Met Office
+|Steve Olson      |US NWS
+|Frédéric Guillaud|Météo-France
 |===
 
 === Conveners
 
-////
-Name of individual(s) who started the SWG process. Could be the lead for an RFC submission, an OGC staff person, or an individual who believes it is time for a revision to an adopted standard.
-////
+Chris Little: Chair, Met Ocean Domain WG
 
 == References
 
-////
-Optional list of references.
-//
+Weather on the Web Draft Engineering Report https://github.com/opengeospatial/Weather-on-the-Web-ER 
+
+OGC WCS Met Ocean Application Profile
