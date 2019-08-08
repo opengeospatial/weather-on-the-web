@@ -87,7 +87,7 @@ It is envisaged that the standard will be consistent with the strategic directio
 
 The service APIs will support both traditional and cloud-based approaches to computing and also enable a mix of public and private business models on a 'level playing field'. For example, no one country is capable of supplying weather forecast data at the highest useful resolutions for the whole globe, so a distributed scalable approach is essential, enabling both advanced countries and the Least Developed Countries contribute to global strategic intiatives of sustainability and development.
 
- == Scope of Work
+== Scope of Work
 
 The original requirements for this standard were evolved in the Met Ocean Domain Working Group, but it is envisaged that many of the common data patterns are applicable in other environmental sciences, or even other domains. The data retrieval patterns to access weather and climate data have been stable for many years. Such patterns include, but are not restricted to, point data, time-series at a point, vertical profiles, trajectories (whether in 2, 3 or 4 dimensions), polygons, or rectangular tiles.
 
@@ -116,10 +116,15 @@ Initially, the SWG will not standardise any data patterns other than: point, tim
 === Specific Existing Work Used as Starting Point
 
 The SWG work is based on:
+
 1. The Met Ocean Domain WG work to specify various Best Practices;
+
 2. The WCS Met Ocean Application profiles done in the WCS SWG;
+
 3. A Met Ocean DWG Hackathon held in December 2018 in Washington DC, USA;
+
 4. The OGC Hackathon held in June 2019 in London, England, UK;
+
 5. The Weather on the Web API Engineering Report.
 
 === Is This a Persistent SWG
@@ -172,6 +177,8 @@ This is not meant as a limiting statement but instead is intended to provide gui
 The SWG will list all Domain Working Groups (DWGs) in which the SWG formation was discussed and/or chartered. If a DWG has specifically endorsed the formation of the SWG, then a statement of endorsement should be included.
 ////
 
+The Met Ocean DWG discussed and endorses the establishment of this SWG.
+
 == Other informative information about the work of this SWG
 
 === Collaboration
@@ -212,7 +219,7 @@ The following people support this proposal and are committed to the Charter and 
 |===
 |Name             |Organization
 |Chris Little     |UK Met Office
-|Steve Olson      |US NWS
+|Steve Olson      |US National Weather Service
 |Frédéric Guillaud|Météo-France
 |===
 
@@ -222,6 +229,6 @@ Chris Little: Chair, Met Ocean Domain WG
 
 == References
 
-Weather on the Web Draft Engineering Report https://github.com/opengeospatial/Weather-on-the-Web-ER 
+[Weather on the Web Draft Engineering Report](https://github.com/opengeospatial/Weather-on-the-Web-ER) 
 
 OGC WCS Met Ocean Application Profile
