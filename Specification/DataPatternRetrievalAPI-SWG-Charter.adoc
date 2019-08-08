@@ -87,30 +87,23 @@ The service APIs will support both traditional and cloud-based approaches to com
  
 == Scope of Work
 
-////
-This section describes the scope of work (SOW) for the work of the SWG. There are typically at least three (3) cases that justify the formation of a SWG: A group of members decide to develop a new OGC candidate standard from scratch, there is a draft submission being discussed by OGC members, or there are outstanding Change Requests for an existing OGC standard and a revision is required.
+The original requirements for this standard were evolved in the Met Ocean Domain Working Group, but it is envisaged that many of the data patterns are applicable in other environmental sciences, or even other domains.
 
-The following describes the characteristics of a SOW for each of these cases.
+There are two main use cases: 
 
-For a SWG focused on defining and documenting a new OGC candidate standard from “scratch,” the SOW SHALL include a statement of the requirements and use cases for the candidate standard being developed. The SOW SHALL also include a justification statement for developing a new candidate OGC standard. The SOW SHALL also describe how the new candidate standard is related to the existing OGC standards baseline and the OGC Reference Model. The final deliverable of a “from scratch” focused SWG SHALL be a candidate standard ready for submission using the OGC standards process.
+1. An end user requires some data for a specific, familiar purpose, such as a forecast surface temperature at a point or over an area, or wind speed and direction along a proposed trajectory or route, but the user does not need the full range of data that modern weather or climate predictions engender.
 
-For a SWG focused on processing a draft submission such as a specification developed outside the OGC and submitted into the OGC for consideration, the SOW would include evaluation of the submission in terms of the relationship to the existing OGC standards baseline (see section below). The final deliverable of such a SWG SHALL be a candidate standard for consideration by the membership for adoption.
+2. A service provider of many value-added products and information services needs an architecture that decouples the provision of data to many evolving distributed applications from the underlying stable, operational, centrallised bulk data production systems. 
 
-For a SWG focused on revisions to an existing adopted standard, the SOW should include a statement that the SWG will collect all outstanding Change Request Proposals (CRPs), evaluate each of the proposals, and make edits to the standard based on CRPs and related decisions of the SWG membership. The SWG, at their discretion, may also ask the membership for any additional change requests that have not been previous submitted. Again, the final deliverable of a revision focused SWG SHALL be a revision of the candidate standard for consideration by the membership for adoption.
-
-In all cases, the SWG Charter shall provide a basic timeline plan for their activities.
-////
+The underlying bulk 'data cube' may be based on regular calculation grids, or may be point-cloud observation based.
 
 === Statement of relationship of planned work to the current OGC standards baseline
 
-////
-This section describes the relationship of the proposed standards activity to the existing standards baseline. For the 3 cases:
-If defining a new standard, a statement of the relationship to the existing standards baseline including statements related to overlap (if any) with existing OGC standards functionality, harmonization issues, and so forth.
+There is no OGC standard addressing these requirements.
 
-If processing change requests and performing a revision to an existing standard, a simple statement to this effect shall be made.
+It is proposed to use the OpenAPI Version 3 framework to define the APIs, which is consistent with the OGC WFS3. Previous experiments, proof-of-concepts and prototyping work have confirmed the feasibility of a consistent approach. 
 
-If processing a draft submission of a specification developed outside the OGC process, a clear statement of the relationship to the existing standards baseline including statements related to overlap (if any) with existing OGC standards functionality, harmonization issues, and so forth. This information is provided to allow a focus of the discussion on criteria for considering any new solution that may be incompatible with older ones, overlaps existing functionality in the current baseline, and criteria for either deprecating older solutions, or simultaneously endorsing more than one option.
-////
+It is planned that once the SWG is established, a candidate standard will be developed within one year.
 
 === What is Out of Scope?
 
