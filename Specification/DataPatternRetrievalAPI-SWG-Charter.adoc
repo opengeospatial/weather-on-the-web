@@ -15,11 +15,11 @@
 |===
 |{set:cellbgcolor:#FFFFFF}
 |[big]*Open Geospatial Consortium*
-|Submission Date: <yyyy-mm-dd>
+|Submission Date: <2019-08-21>
 |Approval Date:   <yyyy-mm-dd>
-|Internal reference number of this OGC(R) document:    YY-nnnrx
+|Internal reference number of this OGC(R) document:    19-055r0
 |Category: OGC(R) Standards Working Group Charter
-|Authors:   <Name(s) of Editor or Editors>
+|Authors:   Chris Little, Steve Olson, Frédéric Guillaud
 |===
 
 [cols = "^", frame = "none"]
@@ -30,7 +30,7 @@
 [cols = "^", frame = "none", grid = "none"]
 |===
 |*Copyright notice*
-|Copyright (C) <year> Open Geospatial Consortium
+|Copyright (C) 2019 Open Geospatial Consortium
 |To obtain additional rights of use, visit http://www.opengeospatial.org/legal/
 |===
 
