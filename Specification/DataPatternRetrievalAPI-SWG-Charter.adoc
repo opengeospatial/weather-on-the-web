@@ -52,7 +52,7 @@ Any questions, please contact OGC staff.
 
 To: OGC members & interested parties
 
-A new OGC Standards Working Group is being formed. The OGC members listed below have proposed the OGC <Name of SWG>.  The SWG proposal provided in this document meets the requirements of the OGC Technical Committee (TC) Policies and Procedures.
+A new OGC Standards Working Group is being formed. The OGC members listed below have proposed the OGC Data Pattern Retrieval API SWG.  The SWG proposal provided in this document meets the requirements of the OGC Technical Committee (TC) Policies and Procedures.
 
 The SWG name, statement of purpose, scope, list of deliverables, audience, and language specified in the proposal will constitute the SWG's official charter. Technical discussions may occur no sooner than the SWG's first meeting.
 
@@ -75,15 +75,15 @@ Please feel free to forward this announcement to any other appropriate lists. Th
 
 == Purpose of the Standards Working Group
 
-////
-Proposers will describe the purpose of the Standards Working Group and its overall mission in relation to OGC processes, the OGC standards baseline, and OGC’s business plan.
-////
+The Data Retrieval Pattern API Standards Working Group will standardise the APIs, defined with OpenAPI Version 3, to retrieve various commmon data patterns from a data cube. the dta patterns will include, but are not restricted to, data at a point in space and time, timeseries at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon.  
 
 == Business Value Proposition
 
 ////
 This section provides a statement describing the value of this standards activity in relation to the OGC Membership, the geospatial community, and the wider IT community. This statement can be in terms of the interoperability problem being solved, processing Change requests to meet market (and Member requirements), a policy requirement and/or some other business value proposition. The proposition described in this section does not have to be in economic terms.
 ////
+
+Much environmental data is truly Big Data, in that it cannot be readily copied and distributed in sensible timescales for many uses. By specifying precisely the data required in a convenient pattern familiar to the user, 
 
 == Scope of Work
 
