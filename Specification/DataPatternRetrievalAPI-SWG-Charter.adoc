@@ -75,16 +75,16 @@ Please feel free to forward this announcement to any other appropriate lists. Th
 
 == Purpose of the Standards Working Group
 
-The Data Retrieval Pattern API Standards Working Group will standardise the APIs, defined with OpenAPI Version 3, to retrieve various commmon data patterns from a data cube. the dta patterns will include, but are not restricted to, data at a point in space and time, timeseries at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon.  
+The Data Retrieval Pattern API Standards Working Group will standardise some APIs, defined with OpenAPI Version 3, to retrieve various commmon data patterns from a data cube. The data patterns will include, but are not restricted to, data at a point in space and time, time series at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon.  
 
 == Business Value Proposition
 
-////
-This section provides a statement describing the value of this standards activity in relation to the OGC Membership, the geospatial community, and the wider IT community. This statement can be in terms of the interoperability problem being solved, processing Change requests to meet market (and Member requirements), a policy requirement and/or some other business value proposition. The proposition described in this section does not have to be in economic terms.
-////
+Much environmental data is truly 'Big Data', in that it cannot be readily copied and distributed in sensible timescales for many uses. By specifying precisely the data required in a convenient pattern familiar to the user, a service provider can extract and serve the requested data, simplying access for the user, and hiding the service implementation details, while being scaleable both in terms of the underlying data cube volume and the number of supported simultaneous users. 
 
-Much environmental data is truly Big Data, in that it cannot be readily copied and distributed in sensible timescales for many uses. By specifying precisely the data required in a convenient pattern familiar to the user, 
+It is envisaged that the standard will be consistent with the strategic direction established by Web Feature Service Version 3 and the future OWS Common for Web Services, but will also be consistent with similar approaches outside the geospatial domain allowing a wide range of data to be combined in innovative ways.
 
+The service APIs will support both traditional and cloud-based approaches to computing and also enable a mix of public and private business models on a 'level playing field'. 
+ 
 == Scope of Work
 
 ////
