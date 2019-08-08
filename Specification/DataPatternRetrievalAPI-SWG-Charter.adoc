@@ -1,4 +1,4 @@
-:Title: OGC (add title text)
+:Title: OGC (Data Retrieval Pattern API SWG Charter)
 :titletext: {Title}
 :doctype: book
 :encoding: utf-8
