@@ -219,6 +219,7 @@ The following people support this proposal and are committed to the Charter and 
 |Steve Olson      |US National Weather Service
 |Frédéric Guillaud|Météo-France
 |Dave Blodgett    |US Geological Survey
+|Tom Kralidis     |Meteorological Service of Canada
 |===
 
 === Conveners
