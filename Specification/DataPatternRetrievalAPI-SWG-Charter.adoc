@@ -1,4 +1,4 @@
-:Title: OGC (Data Retrieval Pattern API SWG Charter)
+:Title: OGC (Environmental Data Retrieval API SWG Charter)
 :titletext: {Title}
 :doctype: book
 :encoding: utf-8
@@ -36,20 +36,6 @@
 
 <<<
 
-////
-Version of 2018-12-12
-Some Instructions
-This document is the template to be used for proposing the formation of a new Standards Working Group (SWG).
-
-The first step is to complete the SWG Charter for the proposed new SWG.
-
-The next step is to email the draft SWG charter to the Technical Committee Chair (TCC).  The TCC will review the draft charter and make any necessary comments and provide guidance.
-
-Finally, once the Charter is ready, the SWG charter will be posted to the OGC Pending Documents and the vote process in the Technical Committee Policies and Procedures will start.
-
-Any questions, please contact OGC staff.
-////
-
 To: OGC members & interested parties
 
 A new OGC Standards Working Group is being formed. The OGC members listed below have proposed the OGC Data Pattern Retrieval API SWG.  The SWG proposal provided in this document meets the requirements of the OGC Technical Committee (TC) Policies and Procedures.
@@ -75,7 +61,7 @@ Please feel free to forward this announcement to any other appropriate lists. Th
 
 == Purpose of the Standards Working Group
 
-The Data Retrieval Pattern API Standards Working Group will standardise some APIs, defined with OpenAPI Version 3, to retrieve various commmon data patterns from a data cube. The data patterns will include, but are not restricted to, data at a point in space and time, time series at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon or rectangular tile.  
+The Environmental Data Retrieval API Standards Working Group will standardise some APIs, defined with OpenAPI Version 3, to retrieve various commmon data patterns from a data store. The data patterns will include, but are not restricted to, data at a point in space and time, time series at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon or rectangular tile.  
 
 == Business Value Proposition
 
@@ -89,11 +75,11 @@ The service APIs will support both traditional and cloud-based approaches to com
 
 == Scope of Work
 
-The original requirements for this standard were evolved in the Met Ocean Domain Working Group, but many of the data patterns are applicable in other environmental sciences, or even other domains. The data retrieval patterns to access weather and climate data have been stable for many years. Such patterns include, but are not restricted to, point data, time-series at a point, vertical profiles, trajectories (whether in 2, 3 or 4 dimensions), polygons, or rectangular tiles.
+The original requirements for this standard were evolved in the Met Ocean Domain Working Group as the Weather on the Web (WotW), but many of the data patterns are applicable in other environmental sciences, or even other domains. The data retrieval patterns to access weather and climate data have been stable for many years. Such patterns include, but are not restricted to, point data, time-series at a point, vertical profiles, trajectories (whether in 2, 3 or 4 dimensions), polygons, or rectangular tiles.
 
 There are two main use cases: 
 
-1. An end user requires some convenient data for a specific, familiar purpose, such as a forecast surface temperature at a point or over an area, or wind speed and direction along a proposed trajectory or route, but the user does not need the full range of data that modern weather or climate predictions, or other Big Data systems, engender.
+1. An end user requires some convenient data for a specific, familiar purpose, such as a forecast surface temperature at a point or over an area, or a timeseries of water flow at a river location, or wind speed and direction along a proposed trajectory or route, but the user does not need the full range of data that modern weather or climate predictions, or other Big Data systems, engender.
 
 2. A service provider of many value-added products and information services needs an architecture that decouples the provision of data to many evolving distributed applications from the underlying stable, operational, centralised bulk data production systems. 
 
@@ -153,7 +139,7 @@ The Met Ocean DWG will also produce a Best Practice document for implementing th
 
 1. API to retrieve data values at a specified location altitude and time (x,y,z,t). Several operational versions of this pattern already exist in different countries for several years.
 
-2. API to retrieve a time series of values at a specified location and altitude (x,y,z). This pattern also has some operational implementations.
+2. API to retrieve a time series of values at a specified location and height (x,y,z), whether elevation or altitude with a specific vertical CRS. This pattern also has some operational implementations.
 
 3. API to retrieve a vertical profile of values at a specified location and time (x,y,t).
 
@@ -163,11 +149,11 @@ The Met Ocean DWG will also produce a Best Practice document for implementing th
 
 5. API to retrieve a series of values along a specified trajectory, whether 2,3, or 4 dimension.
 
-6. API to retrieve a series of values within a corridor, or buffer region, surrounding a trajectory.
+6. API to retrieve a series of values within a 'corridor', that is, a trajectory with a surrounding buffer region along its length.
 
 === Additional SWG Tasks
 
-Liaise with the OGC API Features SWG and OWS COmmon SWG, and other SWGs and DWGs, to ensure consistency of approach to API standardisation.
+Liaise with the OGC API Features SWG and OWS Common SWG, and other SWGs and DWGs, to ensure consistency of approach to API standardisation.
 
 == IPR Policy for this SWG
 
@@ -193,9 +179,13 @@ Collaborators are expected to include, beside the Met Ocean DWG: the Hydrology D
 
 There may be collaboration with the W3C Spatial Data on the Web Interest Group, as it is expected the W3C Best Practices for Data, and Spatial Data, on the Web will be relevant.
 
+There may be the possibility of collaboration with the Research Data Alliance (RDA), and in particular their Data and Metadata Granularity Task Force, part of the Data Discovery Paradigms Interest Group. Granular metadata should be closely related to practical data query patterns.
+
 === Similar or Applicable Standards Work (OGC and Elsewhere)
 
 The UK Government has mandated the use of OpenAPI Version 3 as a national standard for documenting government RESTful APIs.
+
+The Netherlands Government is working towards standardising access to geopsatial data with APIs. https://geonovum.github.io/KP-APIs/#api-designrules 
 
 === Details of first meeting
 
@@ -205,7 +195,7 @@ An initial teleconference will be organised after Charter adoption, and the firs
 
 === Projected on-going meeting schedule
 
-There will be face-to-face meetings organised at each OGC Technical COnferences. GoToMeeting teleconferences will be arranged, probably fortnightly, between TCs, and the documents will be developed on the OGC public GitHub repository 'weather-on-the-web'. Email notifications of the issues being discussed will be made available for those unable to oaccess the GitHub.
+There will be face-to-face meetings organised at each OGC Technical Conference. GoToMeeting teleconferences will be arranged, probably fortnightly, between TCs, and the documents will be developed on the OGC public GitHub repository 'weather-on-the-web'. Email notifications of the issues being discussed will be made available for those unable to access the GitHub.
 
 === Supporters of this Charter
 
