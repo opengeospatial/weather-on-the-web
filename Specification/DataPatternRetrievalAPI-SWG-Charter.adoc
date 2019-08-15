@@ -38,7 +38,7 @@
 
 To: OGC members & interested parties
 
-A new OGC Standards Working Group is being formed. The OGC members listed below have proposed the OGC Data Pattern Retrieval API SWG.  The SWG proposal provided in this document meets the requirements of the OGC Technical Committee (TC) Policies and Procedures.
+A new OGC Standards Working Group is being formed. The OGC members listed below have proposed the OGC Environmental Data Retrieval API SWG.  The SWG proposal provided in this document meets the requirements of the OGC Technical Committee (TC) Policies and Procedures.
 
 The SWG name, statement of purpose, scope, list of deliverables, audience, and language specified in the proposal will constitute the SWG's official charter. Technical discussions may occur no sooner than the SWG's first meeting.
 
@@ -61,7 +61,7 @@ Please feel free to forward this announcement to any other appropriate lists. Th
 
 == Purpose of the Standards Working Group
 
-The Environmental Data Retrieval API Standards Working Group will standardise some APIs, defined with OpenAPI Version 3, to retrieve various commmon data patterns from a data store. The data patterns will include, but are not restricted to, data at a point in space and time, time series at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon or rectangular tile.  
+The Environmental Data Retrieval API Standards Working Group will standardise some APIs, defined with OpenAPI Version 3, to retrieve various common data patterns from a data store. The data patterns will include, but are not restricted to, data at a point in space and time, time series at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon or rectangular tile.  
 
 == Business Value Proposition
 
@@ -85,6 +85,8 @@ There are two main use cases:
 
 The underlying bulk data may be based on regular calculation grids, or may be point-cloud observation based, or other structures.
 
+The service APIs will return the requested data in a specified structured payload format, such as JSON, but not limited to this.
+
 Queries against the service endpoints using the APIs will return all the information that users should need to use the services successfully.
 
 === Statement of relationship of planned work to the current OGC standards baseline
@@ -99,9 +101,11 @@ It is planned that once the SWG is established, a candidate standard will be dev
 
 The SWG will only standardise data retrieval orientated APIs, not product-based APIs that need business specific logic and rules.
 
-Initially, the SWG will not standardise any data patterns other than: point, timeseries, vertical profile, trajectory, corridor, polygon or rectangular tile.
+Initially, the SWG will not standardise any data patterns other than: point, timeseries, vertical profile, trajectory, corridor, polygon or rectangular tile. 
 
-Specifying mechanisms for finding data retrieval services and their endpoints.
+Initially, the SWG will not standardise data patterns that involve the return of ensemble values or probability distribution functions (the fifth dimension), but envisage that it should be straightforward to generalise to support these use cases.
+
+The SWG will not specify mechanisms for finding data retrieval services and their endpoints.
 
 === Specific Existing Work Used as Starting Point
 
@@ -163,13 +167,13 @@ Liaise with the OGC API Features SWG and OWS Common SWG, and other SWGs and DWGs
 
 == Anticipated Audience / Participants
 
-Non-expert users of small timely subsets of large data repositories. Use case vary from rapid, safety-critical environments to research retrievals from long term archives.
+Non-expert users of small timely subsets of large data repositories. Use cases vary from rapid, safety-critical environments to research retrievals from long term archives.
 
-Web developers, who are not experts in the characteristics of the data, but have compelling perhaps novel, applications.
+Web developers, who are not experts in the characteristics of the data, but have compelling perhaps novel, applications using data from disparate domains.
 
 == Domain Working Group Endorsement
 
-The Met Ocean DWG discussed and endorses the establishment of this SWG and presented to the OGC Technical Committee in plenary in Leuven in June 2019.
+The Met Ocean DWG discussed and endorsed the establishment of this SWG and presented to the OGC Technical Committee in Plenary in Leuven in June 2019.
 
 == Other informative information about the work of this SWG
 
@@ -183,7 +187,7 @@ There may be the possibility of collaboration with the Research Data Alliance (R
 
 === Similar or Applicable Standards Work (OGC and Elsewhere)
 
-The UK Government has mandated the use of OpenAPI Version 3 as a national standard for documenting government RESTful APIs.
+The UK Government has mandated the use of OpenAPI Version 3 as a national standard for documenting UK government RESTful APIs. https://www.gov.uk/government/publications/recommended-open-standards-for-government/describing-restful-apis-with-openapi-3 
 
 The Netherlands Government is working towards standardising access to geopsatial data with APIs. https://geonovum.github.io/KP-APIs/#api-designrules 
 
@@ -191,11 +195,11 @@ The Netherlands Government is working towards standardising access to geopsatial
 
 An Ad Hoc Working Group meeting will be convened in Banff, September 2019 to discuss and hopefully approve this charter.
 
-An initial teleconference will be organised after Charter adoption, and the first face-to-face meeting will probably be at the OGC TC Toulouse meeting in November 2019.
+An initial teleconference will be organised after Charter adoption, and the first face-to-face meeting will be at the OGC TC Toulouse meeting in November 2019.
 
 === Projected on-going meeting schedule
 
-There will be face-to-face meetings organised at each OGC Technical Conference. GoToMeeting teleconferences will be arranged, probably fortnightly, between TCs, and the documents will be developed on the OGC public GitHub repository 'weather-on-the-web'. Email notifications of the issues being discussed will be made available for those unable to access the GitHub.
+There will be face-to-face meetings organised at each OGC Technical Conference. GoToMeeting teleconferences will be arranged, probably fortnightly, between TCs, and the documents will be developed on an OGC public GitHub repository. Email notifications of the issues being discussed will be made available for those unable to access the GitHub.
 
 === Supporters of this Charter
 
@@ -208,6 +212,7 @@ The following people support this proposal and are committed to the Charter and 
 |Frédéric Guillaud|Météo-France
 |Dave Blodgett    |US Geological Survey
 |Tom Kralidis     |Meteorological Service of Canada
+|Roope Tervo      |Finnish Meteorological Institute
 |===
 
 === Conveners
