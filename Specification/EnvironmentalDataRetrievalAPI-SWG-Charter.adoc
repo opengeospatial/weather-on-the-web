@@ -214,6 +214,7 @@ The following people support this proposal and are committed to the Charter and 
 |Tom Kralidis     |Meteorological Service of Canada
 |Roope Tervo      |Finnish Meteorological Institute
 |Bruce Bannerman  |
+|Chris Lynnes     |NASA
 |===
 
 === Conveners
