@@ -113,15 +113,15 @@ The SWG work is based on:
 
 1. The Met Ocean Domain WG work to specify various Best Practices;
 
-2. The WCS Met Ocean Application profiles done in the WCS SWG;
+2. The WCS Met Ocean Application profiles done in the WCS SWG https://portal.opengeospatial.org/files/?artifact_id=81773&version=2 ,  https://portal.opengeospatial.org/files/?artifact_id=81789&version=1 , https://portal.opengeospatial.org/files/?artifact_id=81778&version=1 ;
 
-3. The OGC API - Features candidate standard;
+3. The OGC API - Features candidate standard https://github.com/opengeospatial/ogcapi-features ;
 
 4. A Met Ocean DWG Hackathon held in December 2018 in Washington DC, USA;
 
 5. The OGC Hackathon held in June 2019 in London, England, UK;
 
-6. The Weather on the Web API Engineering Report.
+6. The Weather on the Web API Engineering Report https://github.com/opengeospatial/Weather-on-the-Web-ER .
 
 === Is This a Persistent SWG
 
@@ -225,6 +225,6 @@ Chris Little: Chair, Met Ocean Domain WG
 
 Weather on the Web Draft Engineering Report https://github.com/opengeospatial/Weather-on-the-Web-ER
 
-OGC WCS Met Ocean Application Profile
+OGC WCS Met Ocean Application Profile https://portal.opengeospatial.org/files/?artifact_id=81773&version=2
 
 OGC API - Features https://github.com/opengeospatial/WFS_FES
