@@ -61,7 +61,7 @@ Please feel free to forward this announcement to any other appropriate lists. Th
 
 == Purpose of the Standards Working Group
 
-The Environmental Data Retrieval API Standards Working Group will standardise some APIs, defined with OpenAPI Version 3, to retrieve various common data patterns from a data store. The data patterns will include, but are not restricted to, data at a point in space and time, time series at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon or rectangular tile.  
+The Environmental Data Retrieval API Standards Working Group will standardize some APIs, defined with OpenAPI Version 3, to retrieve various common data patterns from a data store. The data patterns will include, but are not restricted to, data at a point in space and time, time series at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon or rectangular tile.  
 
 == Business Value Proposition
 
