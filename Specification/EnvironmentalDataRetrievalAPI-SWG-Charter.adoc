@@ -215,6 +215,7 @@ The following people support this proposal and are committed to the Charter and 
 |Roope Tervo      |Finnish Meteorological Institute
 |Bruce Bannerman  |
 |Chris Lynnes     |NASA
+|Ethan Davies     |UCAR
 |===
 
 === Conveners
