@@ -213,9 +213,11 @@ The following people support this proposal and are committed to the Charter and 
 |Dave Blodgett    |US Geological Survey
 |Tom Kralidis     |Meteorological Service of Canada
 |Roope Tervo      |Finnish Meteorological Institute
-|Bruce Bannerman  |
+|Bruce Bannerman  |Individual
 |Chris Lynnes     |NASA
-|Ethan Davis     |UCAR
+|Ethan Davis      |UCAR
+|Cristiano Lopes  |ESA
+|Iain Burnell     |DSTL
 |===
 
 === Conveners
