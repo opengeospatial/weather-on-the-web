@@ -145,6 +145,8 @@ The Met Ocean DWG will also produce a Best Practice document for implementing th
 
 2. API to retrieve a time series of values at a specified location and height (x,y,z), whether elevation or altitude with a specific vertical CRS. This pattern also has some operational implementations.
 
+=== Additional SWG Tasks
+
 3. API to retrieve a vertical profile of values at a specified location and time (x,y,t).
 
 4. API to retrieve an array of values across a rectangular area (tile). Operational immplementation of this pattern has started.
@@ -154,10 +156,6 @@ The Met Ocean DWG will also produce a Best Practice document for implementing th
 5. API to retrieve a series of values along a specified trajectory, whether 2,3, or 4 dimension.
 
 6. API to retrieve a series of values within a 'corridor', that is, a trajectory with a surrounding buffer region along its length.
-
-=== Additional SWG Tasks
-
-Liaise with the OGC API Features SWG and OWS Common SWG, and other SWGs and DWGs, to ensure consistency of approach to API standardisation.
 
 == IPR Policy for this SWG
 
@@ -179,7 +177,9 @@ The Met Ocean DWG discussed and endorsed the establishment of this SWG and prese
 
 === Collaboration
 
-Collaborators are expected to include, beside the Met Ocean DWG: the Hydrology DWG, WFS/FES SWG and the OWS Common SWG.
+Liaise with the OGC API Features SWG and OWS Common SWG, and other SWGs and DWGs, to ensure consistency of approach to API standardisation.
+
+Other collaborators are expected to include, beside the Met Ocean DWG: the Hydrology DWG, WFS/FES SWG.
 
 As it is expected the W3C Best Practices for Data, and Spatial Data, on the Web will be relevant, there may be collaboration with the W3C Spatial Data on the Web Interest Group. 
 
