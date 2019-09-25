@@ -15,7 +15,7 @@
 |===
 |{set:cellbgcolor:#FFFFFF}
 |[big]*Open Geospatial Consortium*
-|Submission Date: <2019-08-21>
+|Submission Date: <2019-09-25>
 |Approval Date:   <yyyy-mm-dd>
 |Internal reference number of this OGC(R) document:    19-055r1
 |Category: OGC(R) Standards Working Group Charter
@@ -61,7 +61,11 @@ Please feel free to forward this announcement to any other appropriate lists. Th
 
 == Purpose of the Standards Working Group
 
-The Environmental Data Retrieval API Standards Working Group will standardize some APIs, defined with OpenAPI Version 3, to retrieve various common data patterns from a data store. The data patterns will include, but are not restricted to, data at a point in space and time, time series at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon or rectangular tile.  
+The Environmental Data Retrieval API Standards Working Group will standardize several APIs, defined with OpenAPI Version 3, to retrieve various common data patterns from a relatively persistent data store. The data patterns will include, but are not restricted to, data at a point in space and time, time series at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon or rectangular tile.
+
+The APIs will allow service users to retrieve, in effect, transient resources over a discrete sampling geometry, created by the service in response to a standardised query pattern.
+
+The APIs will 'building blocks' allowing the construction of more complex services.
 
 == Business Value Proposition
 
@@ -72,6 +76,10 @@ By using stable and standardized service APIs based on simple data retrieval pat
 It is envisaged that the standard will be consistent with the strategic direction established by "OGC API - Features - Part 1: Core" and the future OWS Common for Web Services.
 
 The service APIs will support both traditional and cloud-based approaches to computing and also enable a mix of public and private business models on a 'level playing field'. For example, no one country is capable of supplying weather forecast data at the highest useful resolutions for the whole globe. Therefore a distributed scalable approach is essential, enabling both advanced countries and the Least Developed Countries to contribute to global strategic initiatives of sustainability and development.
+
+The Environmental Data Retrieval API will support and is consistent with the HTTP and HTTPS protocols that are ubiquitous on the Web, and, where available, will use existing industry standards commonly used by developers, rather than geospatial specific resources. For example, security will be addressed by the use of the OpenAPI Version 3 framework, allowing the use of security schemes that are common and familiar to developers on the Web, such as OAuth2 or JWT.
+
+The API will allow the server to provide details to guide the user of the API, such as allowing the choice of common, web-based, modern encodings such as JSON, though this is not mandated.
 
 == Scope of Work
 
@@ -101,11 +109,13 @@ Once the SWG is established, a candidate standard will be developed within one y
 
 The SWG will only standardize data retrieval orientated APIs, not product-based APIs that need business specific logic and rules.
 
-Initially, the SWG will not standardize any data patterns other than: point, timeseries, vertical profile, trajectory, corridor, polygon or rectangular tile. 
+Initially, the SWG will not standardize any data patterns other than: point, timeseries, vertical profile, trajectory, corridor, polygon or rectangular tile. Other common patterns, such as a 2D plume, vertical cross-section, or aggregate patterns, may be considered later.
 
 Initially, the SWG will not standardize data patterns that involve the return of ensemble values or probability distribution functions (the fifth dimension), but envisage that it should be straightforward to generalize to support these use cases.
 
 The SWG will not specify mechanisms for finding data retrieval services and their endpoints.
+
+As the standard will be modular and multi-part, profiles of the standard should not be necessary. If a community needs to devlop a profile, it should be specified and governed by theat community.
 
 === Specific Existing Work Used as Starting Point
 
@@ -122,6 +132,8 @@ The SWG work is based on:
 5. The OGC Hackathon held in June 2019 in London, England, UK;
 
 6. The Weather on the Web API Engineering Report https://github.com/opengeospatial/Weather-on-the-Web-ER .
+
+7. Any relevant published or draft Engineering Reports from the OGC Innovation Programme.
 
 === Is This a Persistent SWG
 
