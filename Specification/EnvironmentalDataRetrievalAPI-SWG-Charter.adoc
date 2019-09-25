@@ -69,7 +69,7 @@ Much environmental data is truly 'Big Data', as the data cannot be readily copie
 
 By using stable and standardized service APIs based on simple data retrieval patterns, it is envisaged that access and use of data and information will be improved in different domains, including geospatial, facilitating more innovation and value.
 
-It is envisaged that the standard will be consistent with the strategic direction established by "OGC API - Features" and the future OWS Common for Web Services.
+It is envisaged that the standard will be consistent with the strategic direction established by "OGC API - Features - Part 1: Core" and the future OWS Common for Web Services.
 
 The service APIs will support both traditional and cloud-based approaches to computing and also enable a mix of public and private business models on a 'level playing field'. For example, no one country is capable of supplying weather forecast data at the highest useful resolutions for the whole globe. Therefore a distributed scalable approach is essential, enabling both advanced countries and the Least Developed Countries to contribute to global strategic initiatives of sustainability and development.
 
@@ -115,7 +115,7 @@ The SWG work is based on:
 
 2. The WCS Met Ocean Application profiles done in the WCS SWG https://portal.opengeospatial.org/files/?artifact_id=81773&version=2 ,  https://portal.opengeospatial.org/files/?artifact_id=81789&version=1 , https://portal.opengeospatial.org/files/?artifact_id=81778&version=1 ;
 
-3. The OGC API - Features candidate standard https://github.com/opengeospatial/ogcapi-features ;
+3. The OGC API - Features - Part 1: Core standard https://github.com/opengeospatial/ogcapi-features ;
 
 4. A Met Ocean DWG Hackathon held in December 2018 in Washington DC, USA;
 
@@ -230,4 +230,4 @@ Weather on the Web Draft Engineering Report https://github.com/opengeospatial/We
 
 OGC WCS Met Ocean Application Profile https://portal.opengeospatial.org/files/?artifact_id=81773&version=2
 
-OGC API - Features https://github.com/opengeospatial/WFS_FES
+OGC API - Features - Part 1: Core https://github.com/opengeospatial/WFS_FES
