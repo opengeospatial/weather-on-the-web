@@ -63,7 +63,7 @@ Please feel free to forward this announcement to any other appropriate lists. Th
 
 The Environmental Data Retrieval API Standards Working Group will standardize several APIs, defined with OpenAPI (Version 3), to retrieve various common data patterns from a relatively persistent data store. The data patterns will include, but are not restricted to, data at a point in space and time, time series at a point, data along a trajectory, which may be 2, 3, or 4 dimensional, and covering a specified polygon or rectangular tile.
 
-The APIs will allow service users to retrieve, in effect, transient resources over a discrete sampling geometry, created by the service in response to a standardised query pattern.
+The APIs will allow service users to retrieve, in effect, transient resources over a discrete sampling geometry, created by the service in response to a standardized query pattern.
 
 The APIs will provide 'building blocks' allowing the construction of more complex services.
 
@@ -89,7 +89,7 @@ There are two main use cases:
 
 1. An end user requires some convenient data for a specific, familiar purpose, such as a forecast surface temperature at a point or over an area, or a timeseries of water flow at a river location, or wind speed and direction along a proposed trajectory or route. However the user does not need the full range of data that modern weather or climate predictions, or other Big Data systems, provide.
 
-2. A service provider of many value-added products and information services needs an architecture that decouples the provision of data to many evolving distributed applications from the underlying stable, operational, centralised bulk data production systems. 
+2. A service provider of many value-added products and information services needs an architecture that decouples the provision of data to many evolving distributed applications from the underlying stable, operational, centralized bulk data production systems. 
 
 The underlying bulk data may be based on regular calculation grids as used in numerical weather prediction or environmental modelling, or may be point-cloud observation based, or other structures.
 
@@ -101,7 +101,7 @@ Queries against the service endpoints using the APIs will return all the informa
 
 There is no existing OGC standard that directly addresses the above requirements.
 
-The use of the OpenAPI (Version 3) framework is proposed to define the APIs, which is consistent with the "OGC API - Features" specification. Previous experiments, proof-of-concepts and prototyping work have confirmed the feasibility of a consistent approach. 
+The use of the OpenAPI (Version 3) framework is proposed to define the APIs, which is consistent with the "OGC API - Features - Part 1: Core" specification. Previous experiments, proof-of-concepts and prototyping work have confirmed the feasibility of a consistent approach. 
 
 Once the SWG is established, a candidate standard will be developed within one year.
 
@@ -115,7 +115,7 @@ Initially, the SWG will not standardize data patterns that involve the return of
 
 The SWG will not specify mechanisms for finding data retrieval services and their endpoints.
 
-As the standard will be modular and multi-part, the concept of core and extensions will be put forth, thus allowing for a customized approach to implementing service APIs by implementors and data/service providers.  If a community needs to develop a profile, it should be specified and governed by that community.
+As the standard will be modular and multi-part, using the concept of core and extensions will allow a customized approach to implementing service APIs by implementors and data/service providers.  If a community needs to develop a profile, it should be specified and governed by that community.
 
 === Specific Existing Work Used as Starting Point
 
@@ -143,11 +143,11 @@ The SWG work is based on:
 
 === When can the SWG be Inactivated
 
-As there are several data pattern APIs to be standardised, persistent SWG status is proposed, but when all the initial deliverables are finished, inactivation will be considered.
+As there are several data pattern APIs to be standardized, persistent SWG status is proposed, but when all the initial deliverables are finished, inactivation will be considered.
 
 == Description of deliverables
 
-A series of APIs will be standardised for different data retrieval patterns. The Met Ocean DWG and other interested parties have already prioritised the patterns at various OGC meetings.
+A series of APIs will be standardized for different data retrieval patterns. The Met Ocean DWG and other interested parties have already prioritized the patterns at various OGC meetings.
 
 The Met Ocean DWG will also produce a Best Practice document for implementing these APIs within an operational meteorological context.
 
@@ -189,7 +189,7 @@ The Met Ocean DWG discussed and endorsed the establishment of this SWG and prese
 
 === Collaboration
 
-Liaise with the OGC API Features SWG and OWS Common SWG, and other SWGs and DWGs, to ensure consistency of approach to API standardisation.
+Liaise with the OGC API Features SWG and OWS Common SWG, and other SWGs and DWGs, to ensure consistency of approach to API standardization.
 
 Other collaborators are expected to include, beside the Met Ocean DWG: the Hydrology DWG, WFS/FES SWG.
 
