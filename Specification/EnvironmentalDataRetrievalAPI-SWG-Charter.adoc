@@ -230,6 +230,7 @@ The following people support this proposal and are committed to the Charter and 
 |Ethan Davis      |UCAR
 |Cristiano Lopes  |ESA
 |Iain Burnell     |DSTL
+|Keith Ryden      |ESRI
 |===
 
 === Conveners
