@@ -16,7 +16,7 @@
 |{set:cellbgcolor:#FFFFFF}
 |[big]*Open Geospatial Consortium*
 |Submission Date: <2019-09-25>
-|Approval Date:   <yyyy-mm-dd>
+|Approval Date:   <2019-11-26>
 |Internal reference number of this OGC(R) document:    19-055r1
 |Category: OGC(R) Standards Working Group Charter
 |Authors:   Chris Little, Steve Olson, Frédéric Guillaud
